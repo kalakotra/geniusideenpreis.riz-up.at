@@ -1,0 +1,18 @@
+de:
+  SilverStripe\MultiForm\Models\MultiFormSession:
+    PLURALNAME: 'Mehrschritt-Formular-Sitzungen'
+    PLURALS:
+      one: 'Eine Mehrschritt-Formular-Sitzung'
+      other: '{count} Mehrschritt-Formular-Sitzungen'
+    SINGULARNAME: 'Mehrschritt-Formular-Sitzung'
+  SilverStripe\MultiForm\Models\MultiFormStep:
+    BACK: Zurück
+    NEXT: Weiter
+    PLURALNAME: 'Mehrschritt-Formular-Schritte'
+    PLURALS:
+      one: 'Ein Mehrschritt-Formular-Schritt'
+      other: '{count} Mehrschritt-Formular-Schritte'
+    SINGULARNAME: 'Mehrschritt-Formular-Schritt'
+    SUBMIT: Absenden
+  SilverStripe\MultiForm\MultiForm:
+    ProgressPercent: 'Sie haben {percent}% abgeschlossen ({completedSteps}/{totalSteps})'

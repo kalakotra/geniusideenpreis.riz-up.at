@@ -1,0 +1,100 @@
+@font-face {
+    font-family: 'Lato';
+    src: local('Lato Bold Italic'), local('Lato-BoldItalic'),
+        url('/_resources/themes/cba/webfonts/Lato-BoldItalic.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: local('Lato Black'), local('Lato-Black'),
+        url('/_resources/themes/cba/webfonts/Lato-Black.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: local('Lato Bold'), local('Lato-Bold'),
+        url('/_resources/themes/cba/webfonts/Lato-Bold.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: local('Lato Black Italic'), local('Lato-BlackItalic'),
+        url('/_resources/themes/cba/webfonts/Lato-BlackItalic.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato Hairline';
+    src: local('Lato-HairlineItalic'),
+        url('/_resources/themes/cba/webfonts/Lato-HairlineItalic.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-HairlineItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato Hairline';
+    src: local('Lato-Hairline'),
+        url('/_resources/themes/cba/webfonts/Lato-Hairline.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-Hairline.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: local('Lato-LightItalic'),
+        url('/_resources/themes/cba/webfonts/Lato-LightItalic.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: local('Lato Italic'), local('Lato-Italic'),
+        url('/_resources/themes/cba/webfonts/Lato-Italic.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: local('Lato-Light'),
+        url('/_resources/themes/cba/webfonts/Lato-Light.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: local('Lato Regular'), local('Lato-Regular'),
+        url('/_resources/themes/cba/webfonts/Lato-Regular.woff2') format('woff2'),
+        url('/_resources/themes/cba/webfonts/Lato-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

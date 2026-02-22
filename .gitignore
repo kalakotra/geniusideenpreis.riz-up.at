@@ -1,0 +1,7 @@
+/.ddev
+/.env
+/.vscode
+/errorlog.log
+/ideen_ss4.sql.gz
+/public
+/vendor

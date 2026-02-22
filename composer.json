@@ -1,0 +1,62 @@
+{
+    "name": "silverstripe/installer",
+    "type": "silverstripe-recipe",
+    "description": "The SilverStripe Framework Installer",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "silverstripe/recipe-plugin": "~2.0",
+        "silverstripe/vendor-plugin": "~2.0",
+        "silverstripe/recipe-cms": "^5.3",
+        "silverstripe/login-forms": "^5.3",
+        "silverstripe-themes/simple": "~3.2.0",
+        "hudhaifas/silverstripe-frontend-fields": "dev-master",
+        "axllent/silverstripe-scss": "^2.1",
+        "axllent/silverstripe-scaled-uploads": "^2.3",
+        "axllent/silverstripe-meta-editor": "^1.2",
+        "axllent/silverstripe-trailing-slash": "^2.2",
+        "symbiote/silverstripe-gridfieldextensions": "^4.1",
+        "bummzack/sortablefile": "^2.2",
+        "jonom/focuspoint": "^5.0",
+        "silverstripe/multiform": "^3.0@dev",
+        "unclecheese/display-logic": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "extra": {
+        "resources-dir": "_resources",
+        "project-files-installed": [
+            "app/.htaccess",
+            "app/_config.php",
+            "app/_config/mimevalidator.yml",
+            "app/_config/mysite.yml",
+            "app/src/Page.php",
+            "app/src/PageController.php"
+        ],
+        "public-files-installed": [
+            ".htaccess",
+            "index.php",
+            "install-frameworkmissing.html",
+            "install.php",
+            "web.config"
+        ]
+    },
+    "config": {
+        "process-timeout": 600,
+        "allow-plugins": {
+            "composer/installers": true,
+            "silverstripe/recipe-plugin": true,
+            "silverstripe/vendor-plugin": true
+        }
+    },
+    "prefer-stable": true,
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Amir Mehmedovic",
+            "email": "kalakotra@gmail.com",
+            "homepage": "https://kalakotra.com",
+            "role": "Developer"
+        }
+    ]
+}

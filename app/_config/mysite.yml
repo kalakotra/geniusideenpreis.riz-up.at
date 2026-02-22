@@ -1,0 +1,17 @@
+---
+Name: myproject
+---
+SilverStripe\Core\Manifest\ModuleManifest:
+  project: app
+SilverStripe\Security\Member:
+  extensions:
+    - JuryMemberExtension
+Silverstripe\SiteConfig\SiteConfig:
+  extensions:
+    - CustomSiteConfig
+SilverStripe\Assets\Flysystem\FlysystemAssetStore: 
+  legacy_filenames: true
+
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_css:
+    - themes/geniusideen/css/table.css
