@@ -34,8 +34,8 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
             HeaderField::create('header', 'Bestätigung und Datenschutz'),
             CheckboxField::create('AktInfoCheckbox', 'Ja, ich möchte aktuelle Informationen zu den RIZ UP Services erhalten.')->addExtraClass('no-grid'),
-            CheckboxField::create('bewertungCheckbox', 'Ich bestätige, dass alle Angaben vollständig und bereit für die Bewertung durch die RIZ UP GENIUS Jury sind.')->addExtraClass('no-grid'),
-            CheckboxField::create('informationenCheckbox', 'Ich bestätige, die folgenden Informationen gelesen und zur Kenntnis genommen zu haben:')->addExtraClass('no-grid'),
+            CheckboxField::create('bewertungCheckbox', 'Ich bestätige, dass alle Angaben vollständig und bereit für die Bewertung durch die RIZ UP GENIUS Jury sind. *')->addExtraClass('no-grid'),
+            CheckboxField::create('informationenCheckbox', 'Ich bestätige, die folgenden Informationen gelesen und zur Kenntnis genommen zu haben: *')->addExtraClass('no-grid'),
             LiteralField::create('confirmationText', '<strong>Vertraulichkeit:</strong> Alle Daten, die Sie in unser System eingetragen haben, werden selbstverständlich streng vertraulich behandelt. Bei der Registrierung angegebene Kontakt- und Stammdaten werden ausschließlich in der RIZ UP Datenbank gespeichert und nur für die Jurybewertung, Kontaktaufnahme und Information im Rahmen des Wettbewerbs und des RIZ UP verwendet. Unsere Expertinnen und Experten verpflichten sich zur strengsten Geheimhaltung aller Daten, die sie im Rahmen ihrer RIZ UP GENIUS Juryverantwortung erhalten. 
 						<br /><br />
 						<strong>Auskunftsrecht und Widerruf:</strong> Wir erteilen Ihnen jederzeit Auskunft darüber, welche Daten wir über Sie gespeichert haben. Dazu senden Sie bitte eine E-Mail an genius@riz-up.at. Außerdem können Sie die Nutzung der persönlichen Daten jederzeit mit Wirkung für die Zukunft widerrufen. Dazu ist eine E-Mail an kontakt@riz-up.at zu senden. '),
@@ -90,122 +90,136 @@ class RegistrationForm_Step4 extends MultiFormStep {
         ];
 
         $personalDataHtml = '<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Anrede
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Anrede', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Titel vorangestellt
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('AkademischerGrad', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Vorname 
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Vorname', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Nachname 
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Nachname', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Titel nachgestellt
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('AkademischerGradSufix', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Firma
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Firma', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Abteilung
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Abteilung', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Stra&szlig;e, Hausnummer 
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Strasse', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 
 
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Postleitzahl 
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('PLZ', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Ort 
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Ort', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Bezirk 
 			</div>
 			<div class="col-12 col-lg-8">
 				' . ($this->getFieldValue('Bezirk', 'app\\RegistrationForm\\RegistrationForm_Step1') ? $myRegions[$this->getFieldValue('Bezirk', 'app\\RegistrationForm\\RegistrationForm_Step1')] : '') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Telefon 
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Telefonnummer', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				Website
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Website', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 		<div class="row align-items-center mb-1">
-			<div class="col-12 col-lg-4">
+			<div class="col-12 col-lg-4 font-weight-bold">
 				E-Mail 
 			</div>
 			<div class="col-12 col-lg-8">
 				' . $this->getFieldValue('Email', 'app\\RegistrationForm\\RegistrationForm_Step1') . '
 			</div>
 		</div>
+        <hr />
 
 		<div class="row align-items-center mb-1">
-			<div class="col-12">
+			<div class="col-12 font-weight-bold">
 				Wie sind Sie auf den RIZ UP GENIUS aufmerksam geworden?
 			</div>
 			<div class="col-12">
@@ -223,7 +237,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
         $teamMembersHtml = '';
 
         if ($this->getFieldValue('Vorname1', 'app\\RegistrationForm\\RegistrationForm_Step1')) {
-            $teamMembersHtml .= '<h4 >Person 1</h4>';
+            $teamMembersHtml .= '<h4 ><br />Teammitglied 1</h4>';
             $teamMembersHtml .= $this->teamMemberTemplate(
                 $this->getFieldValue('Anrede1', 'app\\RegistrationForm\\RegistrationForm_Step1'),
                 $this->getFieldValue('AkademischerGrad1', 'app\\RegistrationForm\\RegistrationForm_Step1'),
@@ -235,7 +249,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
         if ($this->getFieldValue('Vorname2', 'app\\RegistrationForm\\RegistrationForm_Step1')) {
             $teamMembersHtml .= '<hr />';
-            $teamMembersHtml .= '<h4 >Person 2</h4>';
+            $teamMembersHtml .= '<h4 ><br />Teammitglied 2</h4>';
             $teamMembersHtml .= $this->teamMemberTemplate(
                 $this->getFieldValue('Anrede2', 'app\\RegistrationForm\\RegistrationForm_Step1'),
                 $this->getFieldValue('AkademischerGrad2', 'app\\RegistrationForm\\RegistrationForm_Step1'),
@@ -247,7 +261,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
         if ($this->getFieldValue('Vorname3', 'app\\RegistrationForm\\RegistrationForm_Step1')) {
             $teamMembersHtml .= '<hr />';
-            $teamMembersHtml .= '<h4 >Person 3</h4>';
+            $teamMembersHtml .= '<h4 ><br />Teammitglied 3</h4>';
             $teamMembersHtml .= $this->teamMemberTemplate(
                 $this->getFieldValue('Anrede3', 'app\\RegistrationForm\\RegistrationForm_Step1'),
                 $this->getFieldValue('AkademischerGrad3', 'app\\RegistrationForm\\RegistrationForm_Step1'),
@@ -259,7 +273,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
         if ($this->getFieldValue('Vorname4', 'app\\RegistrationForm\\RegistrationForm_Step1')) {
             $teamMembersHtml .= '<hr />';
-            $teamMembersHtml .= '<h4 >Person 4</h4>';
+            $teamMembersHtml .= '<h4 ><br />Teammitglied 4</h4>';
             $teamMembersHtml .= $this->teamMemberTemplate(
                 $this->getFieldValue('Anrede4', 'app\\RegistrationForm\\RegistrationForm_Step1'),
                 $this->getFieldValue('AkademischerGrad4', 'app\\RegistrationForm\\RegistrationForm_Step1'),
@@ -271,7 +285,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
         if ($this->getFieldValue('Vorname5', 'app\\RegistrationForm\\RegistrationForm_Step1')) {
             $teamMembersHtml .= '<hr />';
-            $teamMembersHtml .= '<h4 >Person 5</h4>';
+            $teamMembersHtml .= '<h4 ><br />Teammitglied 5</h4>';
             $teamMembersHtml .= $this->teamMemberTemplate(
                 $this->getFieldValue('Anrede5', 'app\\RegistrationForm\\RegistrationForm_Step1'),
                 $this->getFieldValue('AkademischerGrad5', 'app\\RegistrationForm\\RegistrationForm_Step1'),
@@ -283,7 +297,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
         if ($this->getFieldValue('OtherTeamMembers', 'app\\RegistrationForm\\RegistrationForm_Step1')) {
             $teamMembersHtml .= '<hr />';
-            $teamMembersHtml .= '<h4 >Weitere Teammitglieder</h4>
+            $teamMembersHtml .= '<h4 ><br />Weitere Teammitglieder</h4>
 ';
             $teamMembersHtml .= '<div class="row align-items-center mb-1">
                     <div class="col-12">
@@ -300,39 +314,43 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
     public function teamMemberTemplate($Anrede, $AkademischerGrad, $AkademischerGradSufix, $Vorname, $Nachname) {
         $html = '<div class="row align-items-center mb-1">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 font-weight-bold">
                     Anrede
                 </div>
                 <div class="col-12 col-lg-8">
                     ' . $Anrede . '
                 </div>
             </div>
+            <hr />
             <div class="row align-items-center mb-1">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 font-weight-bold">
                     Titel vorangestellt
                 </div>
                 <div class="col-12 col-lg-8">
                     ' . $AkademischerGrad . '
                 </div>
             </div>
+            <hr />
             <div class="row align-items-center mb-1">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 font-weight-bold">
                     Titel nachgestellt
                 </div>
                 <div class="col-12 col-lg-8">
                     ' . $AkademischerGradSufix . '
                 </div>
             </div>
+            <hr />
             <div class="row align-items-center mb-1">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 font-weight-bold">
                     Vorname
                 </div>
                 <div class="col-12 col-lg-8">
                     ' . $Vorname . '
                 </div>
             </div>
+            <hr />
             <div class="row align-items-center mb-1">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 font-weight-bold">
                     Nachname
                 </div>
                 <div class="col-12 col-lg-8">
@@ -345,23 +363,25 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
     public function ideeDataHtml() {
         $html = '<div class="row align-items-center mb-1">
-                <div class="col-12 col-lg-4 ">
+                <div class="col-12 col-lg-4  font-weight-bold">
                     Titel der Idee 
                 </div>
                 <div class="col-12 col-lg-8">
                     ' . $this->getFieldValue('IdeenTitle', 'app\\RegistrationForm\\RegistrationForm_Step2') . '
                 </div>
             </div>
+            <hr />
             <div class="row align-items-center mb-1">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 font-weight-bold">
                     Kategorie 
                 </div>
                 <div class="col-12 col-lg-8">
                     ' . $this->CompetitionCategory() . '
                 </div>
             </div>
+            <hr />
             <div class="row mb-1">
-                <div class="col-12">
+                <div class="col-12 font-weight-bold">
                     Ideen-Kurz-Beschreibung
                 </div>
                 <div class="col-12">
@@ -371,7 +391,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
             if ($this->getFieldValue('WarumEinzigartig', 'app\\RegistrationForm\\RegistrationForm_Step2')) {
                 $html .= ' <hr /><div class="row mb-1">
-                    <div class="col-12">
+                    <div class="col-12  font-weight-bold">
                         Warum sollten Kunden bei Ihnen kaufen, was macht Ihre Idee einzigartig?
                     </div>
                     <div class="col-12">
@@ -385,7 +405,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
                 $valueTitle = $value == '1' ? 'Ja' : ($value == '0' ? 'Nein' : 'im Laufen');
                 
                 $html .= ' <hr /><div class="row mb-1">
-                    <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-4 font-weight-bold">
                         Haben Sie die Idee geschützt?
                     </div>
                     <div class="col-12 col-lg-8">
@@ -395,10 +415,10 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
                 if ($value == '1') {
                     $html .= '<div class="row mb-1">
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-4- font-weight-bold">
                             Schutzart
                         </div>
-                        <div class="col-12 col-lg-8">
+                        <div class="col-12 col-lg-8-">
                             ' . $this->getFieldValue('Schutzart', 'app\\RegistrationForm\\RegistrationForm_Step2') . '
                         </div>
                     </div>';
@@ -409,7 +429,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
             if ($value = $this->getFieldValue('IdeeRealisiert', 'app\\RegistrationForm\\RegistrationForm_Step2')) {
                 $valueTitle = $value == '1' ? 'Ja' : 'Nein';
                 $html .= ' <hr /><div class="row mb-1">
-                    <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-4 font-weight-bold">
                         Haben Sie Ihre Idee bereits umgesetzt/realisiert?
                     </div>
                     <div class="col-12 col-lg-8">
@@ -419,7 +439,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
                 if ($value == '1') {
                     $html .= '<div class="row mb-1">
-                        <div class="col-12">
+                        <div class="col-12 font-weight-bold">
                             In welchem Stadium der Entwicklung stehen Sie mit Ihrer Geschäftsidee? Welche Schritte sind noch offen?
                         </div>
                         <div class="col-12 ">
@@ -433,7 +453,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
             if ($value = $this->getFieldValue('Selbststaendig', 'app\\RegistrationForm\\RegistrationForm_Step2')) {
                 $valueTitle = $value == '1' ? 'Ja' : 'Nein';
                 $html .= ' <hr /><div class="row mb-1">
-                    <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-4 font-weight-bold">
                         Sind Sie bereits selbstständig?
                     </div>
                     <div class="col-12 col-lg-8">
@@ -443,7 +463,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
                 if ($value == '1') {
                     $html .= '<div class="row mb-1">
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-4 font-weight-bold">
                             Seit
                         </div>
                         <div class="col-12 col-lg-8">
@@ -456,7 +476,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
             //Zielgruppen
             if ($value = $this->getFieldValue('Zielgruppen', 'app\\RegistrationForm\\RegistrationForm_Step2')) {
                 $html .= ' <hr /><div class="row mb-1">
-                    <div class="col-12">
+                    <div class="col-12 font-weight-bold">
                         Welche Zielgruppen spricht Ihre Geschäftsidee an?
                     </div>
                     <div class="col-12 ">
@@ -468,7 +488,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
             //Einnahmequellen
             if ($value = $this->getFieldValue('Einnahmequellen', 'app\\RegistrationForm\\RegistrationForm_Step2')) {
                 $html .= ' <hr /><div class="row mb-1">
-                    <div class="col-12">
+                    <div class="col-12 font-weight-bold">
                         Wie verdienen Sie Geld mit Ihrer Geschäftsidee?
                     </div>
                     <div class="col-12 ">
@@ -480,7 +500,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
             //MarktChancenRisiken
             if ($value = $this->getFieldValue('MarktChancenRisiken', 'app\\RegistrationForm\\RegistrationForm_Step2')) {
                 $html .= ' <hr /><div class="row mb-1">
-                    <div class="col-12">
+                    <div class="col-12 font-weight-bold">
                         Welche Chancen und Risiken sehen Sie am (potenziellen) Markt?
                     </div>
                     <div class="col-12 ">
@@ -493,7 +513,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
             if ($value = $this->getFieldValue('Wachstumsplanung', 'app\\RegistrationForm\\RegistrationForm_Step2')) {
                 $valueTitle = $value == '1' ? 'Ja' : 'Nein';
                 $html .= ' <hr /><div class="row mb-1">
-                    <div class="col-12 col-lg-4">
+                    <div class="col-12 col-lg-4 font-weight-bold">
                         Planen Sie mit dem Geschäftsmodell zu wachsen?
                     </div>
                     <div class="col-12 col-lg-8">
@@ -503,10 +523,10 @@ class RegistrationForm_Step4 extends MultiFormStep {
 
                 if ($value == '1') {
                     $html .= '<div class="row mb-1">
-                        <div class="col-12 col-lg-4">
+                        <div class="col-12 col-lg-4- font-weight-bold">
                             Wie soll dieses Wachstum aussehen?
                         </div>
-                        <div class="col-12 col-lg-8">
+                        <div class="col-12 col-lg-8-">
                             ' . $this->getFieldValue('WachstumsplanungDetails', 'app\\RegistrationForm\\RegistrationForm_Step2') . '
                         </div>
                     </div>';
@@ -516,7 +536,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
             //MehrwertFuerNiederoesterreich
             if ($value = $this->getFieldValue('MehrwertFuerNiederoesterreich', 'app\\RegistrationForm\\RegistrationForm_Step2')) {
                 $html .= ' <hr /><div class="row mb-1">
-                    <div class="col-12">
+                    <div class="col-12  font-weight-bold">
                         Abschließend: Wir suchen innovative, niederösterreichische Geschäftsideen. Was ist der Mehrwert Ihrer Idee für Niederösterreich?
                     </div>
                     <div class="col-12 ">
@@ -542,15 +562,16 @@ class RegistrationForm_Step4 extends MultiFormStep {
     }
 
     public function uploadedFilesHtml() {
-        $html = '' . $this->getUploadedFiles()->count() . ' Datei(en) hochgeladen.<br />';
+        $html = '';
 
-        if ($files = $this->getUploadedFiles()->filter(['FileGroup' => '1'])) {
+        $files = $this->getUploadedFiles()->filter(['FileGroup' => '1']);
+        if ($files->count() > 0) {
             $links = '';
             foreach ($files as $file) {
                 $links .= '<a href="assets/' . $file->generatedPath(false) . '" target="_blank">' . $file->FileName . '</a><br />';
             }
             $html .= '<div class="row mb-1">
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4  font-weight-bold">
                     Ideen-Beschreibung
                 </div>
                 <div class="col-12 col-lg-8">
@@ -559,13 +580,14 @@ class RegistrationForm_Step4 extends MultiFormStep {
             </div>';
         }
 
-        if ($files = $this->getUploadedFiles()->filter(['FileGroup' => '2'])) {
+        $files = $this->getUploadedFiles()->filter(['FileGroup' => '2']);
+        if ($files->count() > 0) {
             $links = '';
             foreach ($files as $file) {
                 $links .= '<a href="assets/' . $file->generatedPath(false) . '" target="_blank">' . $file->FileName . '</a><br />';
             }
-            $html .= '<div class="row mb-1">
-                <div class="col-12 col-lg-4">
+            $html .= '<hr /><div class="row mb-1">
+                <div class="col-12 col-lg-4  font-weight-bold">
                     Lebenslauf 
                 </div>
                 <div class="col-12 col-lg-8">
@@ -574,13 +596,14 @@ class RegistrationForm_Step4 extends MultiFormStep {
             </div>';
         }
 
-        if ($files = $this->getUploadedFiles()->filter(['FileGroup' => '3'])) {
+        $files = $this->getUploadedFiles()->filter(['FileGroup' => '3']);
+        if ($files->count() > 0) {
             $links = '';
             foreach ($files as $file) {
                 $links .= '<a href="assets/' . $file->generatedPath(false) . '" target="_blank">' . $file->FileName . '</a><br />';
             }
-            $html .= '<div class="row mb-1">
-                <div class="col-12 col-lg-4">
+            $html .= '<hr /><div class="row mb-1">
+                <div class="col-12 col-lg-4 font-weight-bold">
                     Weitere Unterlagen
                 </div>
                 <div class="col-12 col-lg-8">
@@ -593,7 +616,7 @@ class RegistrationForm_Step4 extends MultiFormStep {
     }
 
     public function getUploadedFiles() {
-        return RegistrationFormFiles::get()->filter('MultiFormSessionID', $this->getSession()->ID);;
+        return RegistrationFormFiles::get()->filter('MultiFormSessionID', $this->getSession()->ID);
     }
 
     public function getTitle() {

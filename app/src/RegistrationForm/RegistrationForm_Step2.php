@@ -14,6 +14,7 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\MultiForm\Models\MultiFormStep;
 use SilverStripe\ORM\FieldType\DBField;
+use UncleCheese\DisplayLogic\Forms\Wrapper;
 
 class RegistrationForm_Step2 extends MultiFormStep {
 
@@ -40,6 +41,12 @@ class RegistrationForm_Step2 extends MultiFormStep {
             OptionsetField::create('IdeeGeschuetzt', 'Haben Sie die Idee geschützt? *', 
                 ['1'=>'Ja', '0'=>'Nein', '2'=> 'im Laufen']
             )->addExtraClass('no-grid'),
+            Wrapper::create(
+                LiteralField::create('', '<small>Bitte im nächsten Schritt die Unterlagen dazu hochloden.</small>'),
+                
+            )
+                ->addExtraClass('no-grid pt-0')
+                ->displayIf('IdeeGeschuetzt')->isNotEqualTo('0')->end(),
             DropdownField::create('Schutzart', 'Wählen Sie die Schutzart aus', 
                 ['Patent'=>'Patent', 'Gebrauchsmuster'=>'Gebrauchsmuster', 'Anderer Schutz'=>'Anderer Schutz']
             )
@@ -90,10 +97,11 @@ class RegistrationForm_Step2 extends MultiFormStep {
         return $this->getAllCompetitions()->filter(array("Active"=>"1"))->First();
     }
 
-    public function getValidator__()
+    public function getValidator()
     {
         return RequiredFields::create(array(
             'IdeenTitle',
+            'KategoriesID',
             'KurzBeschreibung',
             'WarumEinzigartig',
             'IdeeGeschuetzt',

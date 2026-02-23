@@ -5,7 +5,7 @@
 				<a href="home/"><img src="$themedResourceURL('/images/riz-up-logo-2021.svg')" alt="RIZ logo" class="logo" /></a>
 			</div>
 			<div class="col-6 col-md-4 col-lg-2">
-				<img src="$themedResourceURL('/images/genius_logo_2025_blau.png')" alt="RIZ logo" class="logo pb-2" />
+				<img src="$themedResourceURL('/images/genius_logo_2026_blau.png')" alt="RIZ logo" class="logo pb-2" />
 			</div>
 			<div class="col-6 col-md-4 col-lg-8 text-right">
 				<div class="row h100">

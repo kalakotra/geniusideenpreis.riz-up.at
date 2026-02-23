@@ -1,22 +1,23 @@
 <?php
 
+use SilverStripe\AssetAdmin\Forms\UploadField;
+use SilverStripe\Assets\File;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\DropdownField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\OptionsetField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DB;
+use SilverStripe\ORM\FieldType\DBField;
+use SilverStripe\Security\Member;
 use SilverStripe\Security\Permission;
 use SilverStripe\Security\Security;
 use Silverstripe\SiteConfig\SiteConfig;
-use SilverStripe\Control\Email\Email;
-use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\ORM\DB;
-use SilverStripe\Security\Member;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\HiddenField;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\DropdownField;
-use SilverStripe\Forms\CheckboxField;
-use SilverStripe\AssetAdmin\Forms\UploadField;
-use SilverStripe\Assets\File;
 
 class Project extends DataObject {
 
@@ -115,7 +116,23 @@ class Project extends DataObject {
 
 		'ActuallInfo' => 'Boolean',
 
-		'WettbewerbAufmerksam' => 'Enum("Empfehlung, Aussendung, Social Media, Universität/(Fach-)Hochschule, Inserat, anderes", "anderes")'
+		'WettbewerbAufmerksam' => 'Enum("Empfehlung, Aussendung, Social Media, Universität/(Fach-)Hochschule, Inserat, anderes", "anderes")',
+
+
+		// additional fields 2026
+		'WarumEinzigartig' => 'Text',
+		'IdeeGeschuetzt' => 'Int', // 0 = Nein, 1 = Ja, 2 = In Planung
+		'Schutzart' => 'Varchar(255)',
+		'IdeeRealisiert' => 'Int', // 0 = Nein, 1 = Ja
+		'Umsetzungsgrad' => 'Text',
+		'Selbststaendig' => 'Int', // 0 = Nein, 1 = Ja
+		'SelbststaendigSeit' => 'Varchar(255)',
+		'Zielgruppen' => 'Text',
+		'Einnahmequellen' => 'Text',
+		'MarktChancenRisiken' => 'Text',
+		'Wachstumsplanung' => 'Int', // 0 = Nein, 1 = Ja
+		'WachstumsplanungDetails' => 'Text',
+		'MehrwertFuerNiederoesterreich' => 'Text'
 
 
 	];
@@ -186,6 +203,31 @@ class Project extends DataObject {
 			'ActuallInfo'
 		);
 		$fields->removeFieldsFromTab("Root", $fixRemove);
+
+		// replace integer fields with dropdowns for better readability
+		$fields->replaceField('IdeeGeschuetzt', 
+			OptionsetField::create('IdeeGeschuetzt', 'Ist Ihre Idee bereits geschützt oder gerade in Planung geschützt zu werden?', 
+				['0'=>'Nein', '1'=>'Ja', '2'=>'im Laufen']
+			)->addExtraClass('no-grid'),
+		);
+
+		$fields->replaceField('IdeeRealisiert', 
+			OptionsetField::create('IdeeRealisiert', 'Ist Ihre Idee bereits realisiert?', 
+				['1'=>'Ja', '0'=>'Nein']
+			)->addExtraClass('no-grid'),
+		);
+
+		$fields->replaceField('Selbststaendig', 
+			OptionsetField::create('Selbststaendig', 'Sind Sie bereits selbstständig?',
+				['1'=>'Ja', '0'=>'Nein']
+			)->addExtraClass('no-grid'),
+		);
+
+		$fields->replaceField('Wachstumsplanung', 
+			OptionsetField::create('Wachstumsplanung', 'Planen Sie mit dem Geschäftsmodell zu wachsen?',
+				['1'=>'Ja', '0'=>'Nein']
+			)->addExtraClass('no-grid'),
+		);
 
 		$removeFields = array(
 			'ProjectNumber',
@@ -755,7 +797,7 @@ class Project extends DataObject {
 				}
 				$fields->addFieldToTab("Root.Main", new LiteralField("table", "<tr><td width='200'>".$value->Firma."</td><td width='120'>".$value->Preisgeld."</td><td width='120'>".$value->PreisgeldVergeben()."</td><td width='120' align='right'>".$PreisgeldOffen."</td></tr>"));
 			}
-			$fields->addFieldToTab("Root.Main", new LiteralField("table", "</table><hr />"));
+			$fields->addFieldToTab("Root.Main", field: new LiteralField("table", "</table><hr />"));
 
 			$fields->addFieldToTab("Root.Main", new LiteralField("title", "<h3>Projekt: ".$this->IdeenTitle."</h3>"));
 			$fields->addFieldToTab("Root.Main", new LiteralField("title", "<h4>Kategorie: ".$this->Kategories()->Title."</h4>"));
@@ -1479,19 +1521,19 @@ class Project extends DataObject {
 			$myBewertung = Bewertung::get()->filter(array("JuryID"=>$this->Jury1ID, "ProjectID"=>$this->ID));
 			if ($myBewertung->exists()) {
 				if ($myBewertung->First()->Status == 1) {
-					$myStatus = '<img src="_resources/icons/akzeptiert.jpg" title="akzeptiert" />';
+					$myStatus = '<img src="/icons/akzeptiert.jpg" title="akzeptiert" />';
 				} else if ($myBewertung->First()->Status == 2) {
-					$myStatus = '<img src="_resources/icons/inbearbeitung.jpg" title="in Bearbeitung" />';
+					$myStatus = '<img src="/icons/inbearbeitung.jpg" title="in Bearbeitung" />';
 				} else if ($myBewertung->First()->Status == 3) {
-					$myStatus = '<img src="_resources/icons/bewertet.jpg" title="bewertet" />';
+					$myStatus = '<img src="/icons/bewertet.jpg" title="bewertet" />';
 				} else if ($myBewertung->First()->Status == 4) {
-					$myStatus = '<img src="_resources/icons/abgelehnt.jpg" title="abgelehnt" />';
+					$myStatus = '<img src="/icons/abgelehnt.jpg" title="abgelehnt" />';
 				} else {
-					$myStatus = '<img src="_resources/icons/ungelesen.jpg" title="ungelesen" />';
+					$myStatus = '<img src="/icons/ungelesen.jpg" title="ungelesen" />';
 				}
 				
 			} else {
-				$myStatus = '<img src="_resources/icons/ungelesen.jpg" title="ungelesen" />';
+				$myStatus = '<img src="/icons/ungelesen.jpg" title="ungelesen" />';
 			}
 
 			if ($this->Jury1()->generatedKurzel() != "") {
@@ -1507,19 +1549,19 @@ class Project extends DataObject {
 			$myBewertung = Bewertung::get()->filter(array("JuryID"=>$this->Jury2ID, "ProjectID"=>$this->ID));
 			if ($myBewertung->exists()) {
 				if ($myBewertung->First()->Status == 1) {
-					$myStatus = '<img src="_resources/icons/akzeptiert.jpg" title="akzeptiert" />';
+					$myStatus = '<img src="/icons/akzeptiert.jpg" title="akzeptiert" />';
 				} else if ($myBewertung->First()->Status == 2) {
-					$myStatus = '<img src="_resources/icons/inbearbeitung.jpg" title="in Bearbeitung" />';
+					$myStatus = '<img src="/icons/inbearbeitung.jpg" title="in Bearbeitung" />';
 				} else if ($myBewertung->First()->Status == 3) {
-					$myStatus = '<img src="_resources/icons/bewertet.jpg" title="bewertet" />';
+					$myStatus = '<img src="/icons/bewertet.jpg" title="bewertet" />';
 				} else if ($myBewertung->First()->Status == 4) {
-					$myStatus = '<img src="_resources/icons/abgelehnt.jpg" title="abgelehnt" />';
+					$myStatus = '<img src="/icons/abgelehnt.jpg" title="abgelehnt" />';
 				} else {
-					$myStatus = '<img src="_resources/icons/ungelesen.jpg" title="ungelesen" />';
+					$myStatus = '<img src="/icons/ungelesen.jpg" title="ungelesen" />';
 				}
 				
 			} else {
-				$myStatus = '<img src="_resources/icons/ungelesen.jpg" title="ungelesen" />';
+				$myStatus = '<img src="/icons/ungelesen.jpg" title="ungelesen" />';
 			}
 
 			if ($this->Jury2()->generatedKurzel() != "") {
@@ -1567,13 +1609,13 @@ class Project extends DataObject {
 		//geprüft&freigegeben,in Bearbeitung,nicht zugelassen,neu
 		$myHtml = "";
 		if ($this->Status == "in Bearbeitung") {
-			$myHtml = '<img src="/_resources/icons/inbearbeitung_project.jpg" title="in Bearbeitung" />';
+			$myHtml = '<img src="/icons/inbearbeitung_project.jpg" title="in Bearbeitung" />';
 		} else if ($this->Status == "nicht zugelassen") {
-			$myHtml = '<img src="/_resources/icons/nicht_zugelasen.jpg" title="nicht zugelassen" />';
+			$myHtml = '<img src="/icons/nicht_zugelasen.jpg" title="nicht zugelassen" />';
 		} else if ($this->Status == "neu") {
-			$myHtml = '<img src="/_resources/icons/neu.jpg" title="neu" />';
+			$myHtml = '<img src="/icons/neu.jpg" title="neu" />';
 		} else {
-			$myHtml = '<img src="/_resources/icons/freigegeben.jpg" title="geprüft & freigegeben" />';
+			$myHtml = '<img src="/icons/freigegeben.jpg" title="geprüft & freigegeben" />';
 		}
 
 		return DBField::create_field('HTMLVarchar', $myHtml);
@@ -1998,19 +2040,19 @@ class Project extends DataObject {
 			$myBewertung = Bewertung::get()->filter(array("JuryID"=>$this->$juryIDField, "ProjectID"=>$this->ID));
 			if ($myBewertung->exists()) {
 				if ($myBewertung->First()->Status == 1) {
-					$myStatus = '<img src="_resources/icons/akzeptiert.jpg" title="akzeptiert" />';
+					$myStatus = '<img src="/icons/akzeptiert.jpg" title="akzeptiert" />';
 				} else if ($myBewertung->First()->Status == 2) {
-					$myStatus = '<img src="_resources/icons/inbearbeitung.jpg" title="in Bearbeitung" />';
+					$myStatus = '<img src="/icons/inbearbeitung.jpg" title="in Bearbeitung" />';
 				} else if ($myBewertung->First()->Status == 3) {
-					$myStatus = '<img src="_resources/icons/bewertet.jpg" title="bewertet" />';
+					$myStatus = '<img src="/icons/bewertet.jpg" title="bewertet" />';
 				} else if ($myBewertung->First()->Status == 4) {
-					$myStatus = '<img src="_resources/icons/abgelehnt.jpg" title="abgelehnt" />';
+					$myStatus = '<img src="/icons/abgelehnt.jpg" title="abgelehnt" />';
 				} else {
-					$myStatus = '<img src="_resources/icons/ungelesen.jpg" title="ungelesen" />';
+					$myStatus = '<img src="/icons/ungelesen.jpg" title="ungelesen" />';
 				}
 				
 			} else {
-				$myStatus = '<img src="_resources/icons/ungelesen.jpg" title="ungelesen" />';
+				$myStatus = '<img src="/icons/ungelesen.jpg" title="ungelesen" />';
 			}
 		}
 

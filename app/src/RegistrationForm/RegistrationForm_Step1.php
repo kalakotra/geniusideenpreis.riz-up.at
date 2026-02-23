@@ -95,23 +95,24 @@ class RegistrationForm_Step1 extends MultiFormStep {
             
             HeaderField::create('header', 'Teammitglieder'),
             LiteralField::create('info', '<p class="smallTextInForm">Bei Teamprojekten - bitte geben Sie die Namen aller Teammitglieder an:</p>')->addExtraClass('w-100'),
-            DropdownField::create('Teammitglieder', 'Wie viele Personen sind in Ihrem Team? *', ['1'=>'1 Person', '2'=>'2 Personen', '3'=>'3 Personen', '4'=>'4 Personen', '5'=>'5 Personen', '6'=>'6 oder mehr Personen'])->addExtraClass('no-grid'),
+            DropdownField::create('Teammitglieder', 'Wie viele weitere Mitglieder sind in Ihrem Team?', ['1'=>'1 Teammitglied', '2'=>'2 Teammitglieder', '3'=>'3 Teammitglieder', '4'=>'4 Teammitglieder', '5'=>'5 Teammitglieder', '6'=>'6 oder mehr Teammitglieder'])->addExtraClass('no-grid')->setEmptyString('Bitte wählen'),
 
             Wrapper::create(
                 LiteralField::create('', '<hr />')->addExtraClass('w-100'),
-                HeaderField::create('header', 'Person 1', 4),
+                HeaderField::create('header', 'Teammitglied 1', 4),
                 OptionsetField::create("Anrede1", "Anrede", singleton('Project')->dbObject('Anrede1')->enumValues()),
                 TextField::create('AkademischerGrad1', 'Titel vorangestellt'),
                 TextField::create('Vorname1', 'Vorname'),
                 TextField::create('Nachname1', 'Nachname'),
                 TextField::create('AkademischerGrad1Sufix', 'Titel nachgestellt'),
             )
-                ->addExtraClass('no-grid'),
+                ->addExtraClass('no-grid')
+                ->displayIf('Teammitglieder')->isGreaterThan('0')->end(),
             
             Wrapper::create(
                 LiteralField::create('', '<hr />')->addExtraClass('w-100'),
-                HeaderField::create('header', 'Person 2', 4),
-                OptionsetField::create("Anrede2", "Anrede", singleton('Project')->dbObject('Anrede1')->enumValues()),
+                HeaderField::create('header', 'Teammitglied 2', 4),
+                OptionsetField::create("Anrede2", "Anrede", singleton('Project')->dbObject('Anrede2')->enumValues()),
                 TextField::create('AkademischerGrad2', 'Titel vorangestellt'),
                 TextField::create('Vorname2', 'Vorname'),
                 TextField::create('Nachname2', 'Nachname'),
@@ -122,8 +123,8 @@ class RegistrationForm_Step1 extends MultiFormStep {
             
             Wrapper::create(
                 LiteralField::create('', '<hr />')->addExtraClass('w-100'),
-                HeaderField::create('header', 'Person 3', 4),
-                OptionsetField::create("Anrede3", "Anrede", singleton('Project')->dbObject('Anrede1')->enumValues()),
+                HeaderField::create('header', 'Teammitglied 3', 4),
+                OptionsetField::create("Anrede3", "Anrede", singleton('Project')->dbObject('Anrede3')->enumValues()),
                 TextField::create('AkademischerGrad3', 'Titel vorangestellt'),
                 TextField::create('Vorname3', 'Vorname'),
                 TextField::create('Nachname3', 'Nachname'),
@@ -134,8 +135,8 @@ class RegistrationForm_Step1 extends MultiFormStep {
             
             Wrapper::create(
                 LiteralField::create('', '<hr />')->addExtraClass('w-100'),
-                HeaderField::create('header', 'Person 4', 4),
-                OptionsetField::create("Anrede4", "Anrede", singleton('Project')->dbObject('Anrede1')->enumValues()),
+                HeaderField::create('header', 'Teammitglied 4', 4),
+                OptionsetField::create("Anrede4", "Anrede", singleton('Project')->dbObject('Anrede4')->enumValues()),
                 TextField::create('AkademischerGrad4', 'Titel vorangestellt'),
                 TextField::create('Vorname4', 'Vorname'),
                 TextField::create('Nachname4', 'Nachname'),
@@ -146,8 +147,8 @@ class RegistrationForm_Step1 extends MultiFormStep {
             
             Wrapper::create(
                 LiteralField::create('', '<hr />')->addExtraClass('w-100'),
-                HeaderField::create('header', 'Person 5', 4),
-                OptionsetField::create("Anrede5", "Anrede", singleton('Project')->dbObject('Anrede1')->enumValues()),
+                HeaderField::create('header', 'Teammitglied 5', 4),
+                OptionsetField::create("Anrede5", "Anrede", singleton('Project')->dbObject('Anrede5')->enumValues()),
                 TextField::create('AkademischerGrad5', 'Titel vorangestellt'),
                 TextField::create('Vorname5', 'Vorname'),
                 TextField::create('Nachname5', 'Nachname'),
