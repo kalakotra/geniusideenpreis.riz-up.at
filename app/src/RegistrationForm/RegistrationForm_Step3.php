@@ -47,7 +47,7 @@ class RegistrationForm_Step3 extends MultiFormStep {
         
         $fields = FieldList::create(
             HeaderField::create('header', 'Dateienupload'),
-            LiteralField::create('', '<p>Bitte beachten Sie unbedingt die Dateigröße sowie das Dateiformat. Sowohl die Ideen-Beschreibung als auch der Kurz-Lebenslauf sind Pflichtfelder!</p>'),
+            LiteralField::create('', '<div><span class="smallTextInForm">Bitte beachten Sie unbedingt die Dateigröße sowie das Dateiformat. Sowohl die Ideen-Beschreibung als auch der Kurz-Lebenslauf sind Pflichtfelder!</span></div>'),
 
             HeaderField::create('header', 'Ideen-Beschreibung *'),
             LiteralField::create('', '<div><span class="smallTextInForm">Unterlagen zur Idee mit Beantwortung der wichtigsten Fragen zu Innovationsgrad / Marktpotenzial / Nutzen für Kundinnen und Kunden / Realisierbarkeit.</span>
@@ -68,8 +68,8 @@ class RegistrationForm_Step3 extends MultiFormStep {
             $upload2 = FileField::create('Lebenslaufs[]', ''),
             LiteralField::create('myUploadedDocuments2', $myHtmlLebenslauf),
 
-            HeaderField::create('header', 'Urkunden, etc.'),
-            LiteralField::create('', '<div><span class="smallTextInForm">Falls Ihre Idee bereits geschützt ist Oder gerade geschützt wird, laden Sie hier bitte Ihre Patenturkunde, Gebrauchsmuster Oder andere Unterlagen dazu hoch.</span>
+            HeaderField::create('header', 'Urkunden etc.'),
+            LiteralField::create('', '<div><span class="smallTextInForm">Falls Ihre Idee bereits geschützt ist oder gerade geschützt wird, laden Sie hier bitte Ihre Patenturkunde, Gebrauchsmuster oder andere Unterlagen dazu hoch.</span>
             <br>
             <span class="smallTextInForm fw-bold">Dateigröße: max. 5 MB pro Datei</span>
             <br>
@@ -84,7 +84,11 @@ class RegistrationForm_Step3 extends MultiFormStep {
         $upload1->getValidator()->setAllowedMaxFileSize('5m');
 
         $upload2->getValidator()->allowedExtensions = array('pdf', 'doc', 'docx', 'ppt', 'pptx');
+        $upload2->getValidator()->setAllowedMaxFileSize('5m');
+
         $upload3->getValidator()->allowedExtensions = array('pdf', 'doc', 'docx', 'ppt', 'pptx');
+        $upload3->getValidator()->setAllowedMaxFileSize('5m');
+
 
         $validator = 1;
         if ($getMyUploadedFiels->filter('FileGroup', 1)->count() == 0) {

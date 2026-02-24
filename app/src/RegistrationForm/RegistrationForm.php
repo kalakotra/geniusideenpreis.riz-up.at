@@ -72,9 +72,13 @@ class RegistrationForm extends MultiForm {
             $email->setFrom("genius@riz-up.at");
 
             $email->setSubject($config->MemberNewProjectTitle); 
-            $messageBody = str_replace("{PROJECT_TITLE}", $myProject->IdeenTitle, $config->MemberNewProject);
+            $messageBody = str_replace(
+                "{PROJECT_TITLE}",
+                (string)($myProject->IdeenTitle ?? ''),
+                (string)($config->MemberNewProject ?? '')
+            );
 
-            $messageBody = str_replace("{PROJECT_STATUS}", $myProject->Status, $messageBody);
+            $messageBody = str_replace("{PROJECT_STATUS}", (string)($myProject->Status ?? ''), $messageBody);
             
             $email->setBody($messageBody);
             
@@ -84,7 +88,7 @@ class RegistrationForm extends MultiForm {
 
         }
 
-        $this->session->delete();
+        //$this->session->delete();
 
         $this->controller->redirect($this->controller->Link() . 'registrationfinished');
     }

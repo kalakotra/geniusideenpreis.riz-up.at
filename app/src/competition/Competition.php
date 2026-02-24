@@ -1,17 +1,18 @@
 <?php
 
-use SilverStripe\ORM\DataObject;
-use SilverStripe\Security\Member;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\CheckboxSetField;
-use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
-use SilverStripe\ORM\DB;
-use SilverStripe\Control\Session;
 use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\Session;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\CheckboxSetField;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\TextField;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DB;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\Security;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 
 class Competition extends DataObject {
@@ -58,7 +59,8 @@ class Competition extends DataObject {
 	);
 
 	public function isOwner() {
-		if ($this->MemberID == Member::currentUserID()) {
+		$currentUser = Security::getCurrentUser();
+		if ($currentUser && $this->MemberID == $currentUser->ID) {
 			return true;
 		}
 

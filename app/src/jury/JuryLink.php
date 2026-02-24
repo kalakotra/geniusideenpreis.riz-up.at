@@ -2,6 +2,7 @@
 
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Member;
+use SilverStripe\Security\Security;
 
 class JuryLink extends DataObject {
 	private static $db = array(
@@ -16,7 +17,8 @@ class JuryLink extends DataObject {
 	);
 
 	public function isOwner() {
-		if ($this->MemberID == Member::currentUserID()) {
+		$currentUser = Security::getCurrentUser();
+		if ($currentUser && $this->MemberID == $currentUser->ID) {
 			return true;
 		}
 

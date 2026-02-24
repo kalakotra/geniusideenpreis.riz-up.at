@@ -47,7 +47,7 @@ class RegistrationForm_Step2 extends MultiFormStep {
             )
                 ->addExtraClass('no-grid pt-0')
                 ->displayIf('IdeeGeschuetzt')->isNotEqualTo('0')->end(),
-            DropdownField::create('Schutzart', 'Wählen Sie die Schutzart aus', 
+            DropdownField::create('Schutzart', 'Wählen Sie die Schutzart aus *', 
                 ['Patent'=>'Patent', 'Gebrauchsmuster'=>'Gebrauchsmuster', 'Anderer Schutz'=>'Anderer Schutz']
             )
                 ->setEmptyString('Bitte wählen...')
@@ -62,7 +62,7 @@ class RegistrationForm_Step2 extends MultiFormStep {
             OptionsetField::create('Selbststaendig', 'Sind Sie bereits selbstständig? *', 
                 ['1'=>'Ja', '0'=>'Nein']
             )->addExtraClass('no-grid'),
-            TextField::create('SelbststaendigSeit', 'Wenn ja, seit wann?')
+            TextField::create('SelbststaendigSeit', 'Wenn ja, seit wann? *')
                 ->displayIf('Selbststaendig')->isEqualTo('1')->end(),
             
             LiteralField::create('', '<hr />')->addExtraClass('w-100'),
@@ -76,7 +76,7 @@ class RegistrationForm_Step2 extends MultiFormStep {
             OptionsetField::create('Wachstumsplanung', 'Planen Sie mit dem Geschäftsmodell zu wachsen? *', 
                 ['1'=>'Ja', '0'=>'Nein']
             )->addExtraClass('no-grid'),
-            TextField::create('WachstumsplanungDetails', 'Wie soll dieses Wachstum aussehen?')
+            TextField::create('WachstumsplanungDetails', 'Wie soll dieses Wachstum aussehen? *')
                 ->displayIf('Wachstumsplanung')->isEqualTo('1')->end(),
             
             LiteralField::create('', '<hr />')->addExtraClass('w-100'),

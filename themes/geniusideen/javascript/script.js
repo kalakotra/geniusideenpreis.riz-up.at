@@ -38,6 +38,38 @@ jQuery.noConflict();
 			$('#RegistrationForm_RegistrationForm_action_next').attr("disabled", "disabled");
 		}
 
+		$('#RegistrationForm_RegistrationForm_IdeeGeschuetzt input').on("change", function() {
+			if ($(this).val() == "1") {
+				$('#RegistrationForm_RegistrationForm_Schutzart').attr("required", "required");
+			} else {
+				$('#RegistrationForm_RegistrationForm_Schutzart').removeAttr("required");
+			}
+		});
+
+		$('#RegistrationForm_RegistrationForm_IdeeRealisiert input').on("change", function() {
+			if ($(this).val() == "1") {
+				$('#RegistrationForm_RegistrationForm_Umsetzungsgrad').attr("required", "required");
+			} else {
+				$('#RegistrationForm_RegistrationForm_Umsetzungsgrad').removeAttr("required");
+			}
+		});
+
+		$('#RegistrationForm_RegistrationForm_Selbststaendig input').on("change", function() {
+			if ($(this).val() == "1") {
+				$('#RegistrationForm_RegistrationForm_SelbststaendigSeit').attr("required", "required");
+			} else {
+				$('#RegistrationForm_RegistrationForm_SelbststaendigSeit').removeAttr("required");
+			}
+		});
+
+		$('#RegistrationForm_RegistrationForm_Wachstumsplanung input').on("change", function() {
+			if ($(this).val() == "1") {
+				$('#RegistrationForm_RegistrationForm_WachstumsplanungDetails').attr("required", "required");
+			} else {
+				$('#RegistrationForm_RegistrationForm_WachstumsplanungDetails').removeAttr("required");
+			}
+		});
+
 
  		/*$("#AktInfoCheckbox").on("change", function() {
 			if ($("#agreeBox input:checked").length == 2) {

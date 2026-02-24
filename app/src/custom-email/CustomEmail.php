@@ -1,12 +1,13 @@
 <?php
 
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Forms\CheckboxField;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Member;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Control\Email\Email;
+use SilverStripe\Security\Security;
 
 class CustomEmail extends DataObject {
 	private static $db = array(
@@ -186,7 +187,8 @@ class CustomEmail extends DataObject {
 	);
 
 	public function isOwner() {
-		if ($this->MemberID == Member::currentUserID()) {
+		$currentUser = Security::getCurrentUser();
+		if ($currentUser && $this->MemberID == $currentUser->ID) {
 			return true;
 
 

@@ -1,9 +1,10 @@
 <?php
 
+use SilverStripe\Assets\File;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Security\Member;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Assets\File;
+use SilverStripe\Security\Security;
 
 class Document extends DataObject {
 	private static $db = array(
@@ -26,7 +27,8 @@ class Document extends DataObject {
     ];
 
 	public function isOwner() {
-		if ($this->MemberID == Member::currentUserID()) {
+		$currentUser = Security::getCurrentUser();
+		if ($currentUser && $this->MemberID == $currentUser->ID) {
 			return true;
 		}
 
