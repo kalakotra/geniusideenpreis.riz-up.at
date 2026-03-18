@@ -2,6 +2,7 @@
 
 namespace app\Competition;
 
+use Competition;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
@@ -18,6 +19,8 @@ class CompetitionFileExportController extends Controller {
         'index'
     ];
 
+	private static $target_dir = '/exports/';
+
     public function index(HTTPRequest $request) {
         $id = $request->param('ID');
         
@@ -27,6 +30,22 @@ class CompetitionFileExportController extends Controller {
         }
 
         $zipNames = $this->generateApplicationsZipArchive($competition->ID);
+
+		if (count($zipNames) > 0) {
+			// Assuming only one zip file is generated, you can adjust this if multiple files are expected
+			$zipName = $zipNames[0];
+			$filePath = Director::baseFolder() . static::$target_dir . '/' . basename($zipName);
+
+			if (file_exists($filePath)) {
+				$this->getResponse()->addHeader('Content-Type', 'application/zip');
+				$this->getResponse()->addHeader('Content-Disposition', 'attachment; filename="' . basename($zipName) . '"');
+				return file_get_contents($filePath);
+			} else {
+				return $this->httpError(404, 'Datei nicht gefunden');
+			}
+		} else {
+			return $this->httpError(500, 'Fehler bei der Erstellung der ZIP-Datei');
+		}
     }
 
 
@@ -42,17 +61,13 @@ class CompetitionFileExportController extends Controller {
 		//We can't create zip archive for a big number of files because this will lead to a memory overflow
         $baseFolder = Director::baseFolder();
         $targetDirectory = $baseFolder.static::$target_dir;
-        $zipname = $targetDirectory.'/doc-'.$competitionId.'.zip';
+        
 
         if (!is_dir($targetDirectory)) {
             mkdir($targetDirectory, 0777, true);
         }
 
-        if (file_exists($zipname)) {
-            unlink($zipname);
-        }
-
-        $projects = Project::get()
+        $projects = \Project::get()
             ->filter([
                 'CompetitionID' => $competitionId,
             ])
@@ -60,6 +75,17 @@ class CompetitionFileExportController extends Controller {
                 $bewertung = $project->Bewertung()->filter('Status', '3');
                 return $bewertung->count() > 0;
             });
+		
+		if ($projects->count() == 0) {
+			return [];
+		}
+		
+		$ShortCode = $projects->first()->Competition()->ShortCode;
+		$zipname = $targetDirectory.'/competition-'.$ShortCode.'.zip';
+
+        if (file_exists($zipname)) {
+            unlink($zipname);
+        }
 
 		//The initial available memory before starting zip generation
 		$memory_limit = intval(ini_get('memory_limit'));
@@ -73,52 +99,47 @@ class CompetitionFileExportController extends Controller {
 
 		// echo "Creating zip archive: $zipname <br />";
 
-		foreach ($projects as $application) {
-			$filesCount = $application->Files()->count();
+		foreach ($projects as $project) {
 
-			if ($filesCount > 0) {
-				// echo "Processing application: {$application->ID} with {$filesCount} files <br />";
-				//We predict the needed memory with some safety margin by substracting the the double of the file size
-				//the rest $allowedMemory value
-				$allowedMemory -= $application->getTotalFilesSize()*2;
-				//If the remaining value of $allowedMemory is equal or less than 0 then we close the currently opened
-				//archive and remove its reference in the memory then we create a new archive to hold the files of the
-				//current application
-				if ($allowedMemory <= 0) {
-					// echo "Allowed memory is less than 0, closing zip archive: $zipname <br />";
-					$zip->close();
-					// echo "Closing zip archive: $zipname <br /><br />";
-
-					$allowedMemory = $initAllowedMemory;
-					unset($zip);
-					$zip = new ZipArchive;
-					$zipNumber = $application->ID;
-					$zipname = $baseFolder.'/'.static::$target_dir.'/antraege-unterlagen-ab-'.$zipNumber.'.zip';
-					// echo "Creating new zip archive: $zipname <br />";
-
-					// commented out because it will not add last application files to the zip archive and it make error on $zip->close(); (line 304)
-					//if ($application->ID != $lastApplicationId) {
-						$zip->open($zipname, ZipArchive::CREATE);
-						foreach ($application->Files() as $file) {
-							// echo "Adding file: {$file->Name} to zip archive: $zipname <br />";
-							$zip->addFromString(
-								'antraege-unterlagen-ab-'.$zipNumber.'-'.$application->getFolderPath().'/'.$file->Name,
-								$file->getString()
-							);
-						}
-					//}
-
-				} else {
-					// echo "Allowed memory is enough, adding files to zip archive: $zipname <br />";
-					foreach ($application->Files() as $file) {
-						// echo "Adding file: {$file->Name} to zip archive: $zipname <br />";
-						$zip->addFromString(
-							'antraege-unterlagen-ab-'.$zipNumber.'-'.$application->getFolderPath().'/'.$file->Name,
-							$file->getString()
-						);
+			/*
+			Lebenslaufs' => File::class,
+			'Dokumente' => File::class,
+			'Urkunden' => File::class,
+			 */
+			$LebenslaufsCount = $project->Lebenslaufs()->count();
+			$DokumenteCount = $project->Dokumente()->count();
+			$UrkundenCount = $project->Urkunden()->count();
+			if ($LebenslaufsCount > 0) {
+				$nr = 1;
+				foreach ($project->Lebenslaufs() as $file) {
+					if ($file->exists()) {
+						$zip->addFromString($project->ProjectNumber.'/Lebenslaufs/'. $nr. '-' .$file->Name, $file->getString());
+						$nr++;
 					}
 				}
 			}
+
+			if ($DokumenteCount > 0) {
+				$nr = 1;
+				foreach ($project->Dokumente() as $file) {
+					if ($file->exists()) {
+						$zip->addFromString($project->ProjectNumber.'/Dokumente/'. $nr. '-' .$file->Name, $file->getString());
+						$nr++;
+					}
+				}
+			}
+
+			if ($UrkundenCount > 0) {
+				$nr = 1;
+				foreach ($project->Urkunden() as $file) {
+					if ($file->exists()) {
+						$zip->addFromString($project->ProjectNumber.'/Urkunden/'. $nr. '-' .$file->Name, $file->getString());
+						$nr++;
+					}
+				}
+			}
+
+			
 
 		}
 		// echo "Closing zip archive: $zipname <br /><br />";

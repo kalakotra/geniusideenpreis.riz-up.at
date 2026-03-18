@@ -206,9 +206,6 @@ class Project extends DataObject {
 		'Nominierte',
 		'OffiziellerPlatz',
 		'AdminKomentar',
-		'Lebenslaufs',
-		'Dokumente',
-		'Urkunden',
 	];
 
 	public function getCMSFields() {

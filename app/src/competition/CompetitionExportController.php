@@ -44,15 +44,15 @@ class CompetitionExportController extends \SilverStripe\Control\Controller
                 $bewertung = $project->Bewertung()->filter('Status', '3');
                 return $bewertung->count() > 0;
             });
-
+        $fileName = $competition->ShortCode ? "competition-{$competition->ShortCode}" : "competition-{$competition->ID}";
         $filePath = $this->generateSingleExcelDocument(
             $projects,
-            $competition->Title,
+            $fileName,
             '/exports/' . $competition->ID,
             $competition
         );
 
-        header('Content-Disposition: attachment; filename="' . $competition->Title . '-export.xlsx"');
+        header('Content-Disposition: attachment; filename="' . $fileName . '.xlsx"');
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         readfile($filePath);
         exit;

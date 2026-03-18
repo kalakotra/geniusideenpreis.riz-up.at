@@ -110,9 +110,9 @@ class Competition extends DataObject {
 		
 		// export tab 
 		$fields->addFieldsToTab("Root.Export", [
-			LiteralField::create("ExportInfo", "<p>Hier können die Daten aller Projekte als CSV-Datei exportiert werden. Es werden alle Projekte exportiert, auch jene, die nicht eingereicht wurden.</p>"),
+			LiteralField::create("ExportInfo", "<p>Hier können die Daten aller Projekte als CSV-Datei und ZIP-Datei exportiert werden.</p>"),
 			LiteralField::create("ExportLink", "<a href=\"/export/competition/".$this->ID."\" class=\"btn btn-primary\">XLS exportieren</a>"),
-			LiteralField::create("ExportLink", "<a href=\"/export/competitionfiles/".$this->ID."\" class=\"btn btn-primary\">XLS exportieren</a>")
+			LiteralField::create("ExportLinkFiles", "<a href=\"/export/competitionfiles/".$this->ID."\" class=\"btn btn-primary\">ZIP exportieren (Dokumente)</a>")
 		]);
 
 		return $fields;
