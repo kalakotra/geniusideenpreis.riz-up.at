@@ -18,7 +18,8 @@
         "bummzack/sortablefile": "^2.2",
         "jonom/focuspoint": "^5.0",
         "silverstripe/multiform": "^3.0@dev",
-        "unclecheese/display-logic": "dev-master"
+        "unclecheese/display-logic": "^3.0",
+        "phpoffice/phpspreadsheet": "^5.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"

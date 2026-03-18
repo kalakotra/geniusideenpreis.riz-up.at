@@ -8,6 +8,7 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
@@ -105,6 +106,13 @@ class Competition extends DataObject {
 			TextField::create("MaxPoints"),
 			//$gridField
 			CheckboxSetField::create("CompetitionCriteria", "CompetitionCriteria", $myCriteria->map('ID', 'InternalTitle'))
+		]);
+		
+		// export tab 
+		$fields->addFieldsToTab("Root.Export", [
+			LiteralField::create("ExportInfo", "<p>Hier können die Daten aller Projekte als CSV-Datei exportiert werden. Es werden alle Projekte exportiert, auch jene, die nicht eingereicht wurden.</p>"),
+			LiteralField::create("ExportLink", "<a href=\"/export/competition/".$this->ID."\" class=\"btn btn-primary\">XLS exportieren</a>"),
+			LiteralField::create("ExportLink", "<a href=\"/export/competitionfiles/".$this->ID."\" class=\"btn btn-primary\">XLS exportieren</a>")
 		]);
 
 		return $fields;

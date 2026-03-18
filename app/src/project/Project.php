@@ -185,6 +185,32 @@ class Project extends DataObject {
 		'Urkunden'
     ];
 
+
+	// included fields for xls export
+	private static $included_fields = [
+		'ProjectNumber',
+		'Vorname',
+		'Nachname',
+		'Firma',
+		'Ort',
+		'Bezirk',
+		'WettbewerbAufmerksam',
+		'IdeenTitle',
+		'Kategorie',
+		'KurzBeschreibung',
+		'Bewertung',
+		'JuryPoints',
+		'JuryPlace',
+		'AdminPoints',
+		'AdminPlace',
+		'Nominierte',
+		'OffiziellerPlatz',
+		'AdminKomentar',
+		'Lebenslaufs',
+		'Dokumente',
+		'Urkunden',
+	];
+
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 

@@ -1,0 +1,10 @@
+---
+Name: routes
+After:
+  - '#rootroutes'
+  - '#coreroutes'
+---
+SilverStripe\Control\Director:
+  rules:
+    '/export/competition/$ID': 'app\Competition\CompetitionExportController'
+    '/export/competitionfiles/$ID': 'app\Competition\CompetitionFileExportController'
