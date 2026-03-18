@@ -27,7 +27,7 @@
 								$Description
 							</div>
 							<% if isOwner %>
-								<a href="$Top.Link/deleteDocument/$ID" class="documentDeleteLink youSure" title="Information löschen"><img src="$ThemeDir/images/delete.png" /></a>
+								<a href="$Top.Link/deleteDocument/$ID" class="documentDeleteLink youSure" title="Information löschen"><img src="$themedResourceURL(/images/delete.png)" /></a>
 							<% end_if %>
 						</div>
 					<% end_loop %>
@@ -50,7 +50,7 @@
 								$Description
 							</div>
 							<% if isOwner %>
-								<a href="$Top.Link/deleteJuryLink/$ID" class="documentDeleteLink youSure" title="Information löschen"><img src="$ThemeDir/images/delete.png" /></a>
+								<a href="$Top.Link/deleteJuryLink/$ID" class="documentDeleteLink youSure" title="Information löschen"><img src="$themedResourceURL(/images/delete.png)" /></a>
 							<% end_if %>
 						</div>
 					<% end_loop %>

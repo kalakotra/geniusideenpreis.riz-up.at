@@ -1,25 +1,26 @@
 <?php
 
-use SilverStripe\Security\Member;
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\HiddenField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
-use UncleCheese\Dropzone\FileAttachmentField;
-use SilverStripe\Forms\FormAction;
-use SilverStripe\Forms\RequiredFields;
-use SilverStripe\Forms\Form;
-use SilverStripe\Forms\FieldList;
-use SilverStripe\Control\Email\Email;
-use Silverstripe\SiteConfig\SiteConfig;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Folder;
+use SilverStripe\Assets\Upload;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\FileField;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FormAction;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\Queries\SQLSelect;
 use SilverStripe\ORM\ValidationResult;
-use SilverStripe\Assets\Upload;
-use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Security\Member;
+use SilverStripe\Security\Security;
+use Silverstripe\SiteConfig\SiteConfig;
+use SilverStripe\Versioned\Versioned;
+use UncleCheese\Dropzone\FileAttachmentField;
 
 
 class JuryPageController extends PageController {
@@ -142,10 +143,10 @@ class JuryPageController extends PageController {
              
             $email->setFrom("genius@riz-up.at"); 
             $email->setSubject($config->AdminProjectRejectedTitle); 
-            $messageBody = str_replace("{PROJECT_NUMBER}", $myProject->myProjectNumber(), $config->AdminProjectRejected);
-            $messageBody = str_replace("{PROJECT_TITLE}", $myProject->IdeenTitle, $messageBody);
-            $messageBody = str_replace("{JURY_NAME}", $this->getCurrentUser()->Name, $messageBody);
-            $messageBody .= "<br><br>Begründung: ".$data["rejectionText"];
+            $messageBody = str_replace("{PROJECT_NUMBER}", (string)($myProject->myProjectNumber() ?? ''), (string)($config->AdminProjectRejected ?? ''));
+            $messageBody = str_replace("{PROJECT_TITLE}", (string)($myProject->IdeenTitle ?? ''), $messageBody);
+            $messageBody = str_replace("{JURY_NAME}", (string)($this->getCurrentUser()->Name ?? ''), $messageBody);
+            $messageBody .= "<br><br>Begründung: ".(string)($data["rejectionText"] ?? '');
             $email->setBody($messageBody);
 
             //$email->setTo("kalakotra@gmail.com");
@@ -300,8 +301,9 @@ class JuryPageController extends PageController {
         
         if (isset($data["DocumentUpload"])) {
             $document = $data['DocumentUpload'];
-            if ($document['tmp_name'] != ""){ 
-                $myFolder = Folder::find_or_make("projects/jurydocuments/".Member::currentUserID()."/");
+            if ($document['tmp_name'] != ""){
+                $currentUser = Security::getCurrentUser();
+                $myFolder = Folder::find_or_make("projects/jurydocuments/".$currentUser->ID."/");
                 
                 
                 /*$content = file_get_contents($document['tmp_name']);
@@ -320,7 +322,6 @@ class JuryPageController extends PageController {
                         'error' => $document['error'],
                         'size' => $document['size']
                     );
-                print_r($tmpFile);
                 $file = self::doUpload($tmpFile, $myFolder);
 
                 //$myObject->Document()->add($file);
@@ -355,7 +356,8 @@ class JuryPageController extends PageController {
     public function deleteDocument() {
         $myID = $this->request->param("ID");
         $myDocument = Document::get()->byId($myID);
-        if ($myDocument->MemberID == Member::currentUserID()) {
+        $currentUser = Security::getCurrentUser();
+        if ($myDocument->MemberID == $currentUser->ID) {
             $myDocument->delete();
         }
 
@@ -392,7 +394,8 @@ class JuryPageController extends PageController {
     public function deleteJuryLink() {
         $myID = $this->request->param("ID");
         $myDocument = JuryLink::get()->byId($myID);
-        if ($myDocument->MemberID == Member::currentUserID()) {
+        $currentUser = Security::getCurrentUser();
+        if ($myDocument->MemberID == $currentUser->ID) {
             $myDocument->delete();
         }
 
@@ -440,7 +443,8 @@ class JuryPageController extends PageController {
     public function deleteProjectInfoLink() {
         $myID = $this->request->param("ID");
         $myDocument = JuryProjectInfo::get()->byId($myID);
-        if ($myDocument->MemberID == Member::currentUserID()) {
+        $currentUser = Security::getCurrentUser();
+        if ($myDocument->MemberID == $currentUser->ID) {
             $myDocument->delete();
         }
 

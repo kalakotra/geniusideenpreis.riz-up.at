@@ -68,7 +68,7 @@ class CompetitionCriteria extends DataObject {
 
 	public function getMemberBewertung() {
 		return $this->Bewertung()->filter([
-			"JuryID" => Security::getCurrentUser()->ID, ///Member::currentUserID(),
+			"JuryID" => Security::getCurrentUser()->ID, 
 			"ProjectID" => Controller::curr()->request->param("ID")
 		])->First();
 	}

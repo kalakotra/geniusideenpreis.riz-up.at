@@ -3,6 +3,7 @@
 namespace app\RegistrationForm;
 
 use app\RegistrationForm\RegistrationForm_Step1;
+use Project;
 use SilverStripe\Assets\File;
 use SilverStripe\Assets\Upload;
 use SilverStripe\Control\Email\Email;
@@ -10,6 +11,7 @@ use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\Debug;
 use SilverStripe\MultiForm\Forms\MultiForm;
 use SilverStripe\MultiForm\Models\MultiFormStep;
+use SilverStripe\Security\Member;
 use SilverStripe\SiteConfig\SiteConfig;
 
 class RegistrationForm extends MultiForm {
@@ -66,31 +68,85 @@ class RegistrationForm extends MultiForm {
 
             $myProject->write();
 
-            $config = SiteConfig::current_site_config();
-                
-            $email = new Email();
-            $email->setFrom("genius@riz-up.at");
-
-            $email->setSubject($config->MemberNewProjectTitle); 
-            $messageBody = str_replace(
-                "{PROJECT_TITLE}",
-                (string)($myProject->IdeenTitle ?? ''),
-                (string)($config->MemberNewProject ?? '')
-            );
-
-            $messageBody = str_replace("{PROJECT_STATUS}", (string)($myProject->Status ?? ''), $messageBody);
-            
-            $email->setBody($messageBody);
-            
-            
-            $email->setTo($myProject->Email);
-            $email->send();
+            // send email to user
+            $this->sendEmailToUser($myProject);
+            // send email to admin
+            $this->sendEmailToAdmin($myProject);
 
         }
 
         //$this->session->delete();
 
         $this->controller->redirect($this->controller->Link() . 'registrationfinished');
+    }
+
+    public function sendEmailToUser(Project $myProject) {
+        $config = SiteConfig::current_site_config();
+            
+        $email = Email::create();
+        $email->setFrom("genius@riz-up.at");
+
+        $email->setSubject($config->MemberNewProjectTitle); 
+        $messageBody = str_replace(
+            "{PROJECT_TITLE}",
+            (string)($myProject->IdeenTitle ?? ''),
+            (string)($config->MemberNewProject ?? '')
+        );
+
+        $messageBody = str_replace("{PROJECT_STATUS}", (string)($myProject->Status ?? ''), $messageBody);
+        
+        $email->setBody($messageBody);
+        
+        
+        $email->setTo($myProject->Email);
+        $email->send();
+    }
+
+    public function sendEmailToAdmin(Project $myProject) {
+        $config = SiteConfig::current_site_config(); 
+
+			$email = new Email();
+			 
+	        $email->setFrom("genius@riz-up.at"); 
+	        $email->setSubject($config->AdminNewProjectTitle ." ". $myProject->IdeenTitle); 
+	        $messageBody = str_replace("{PROJECT_TITLE}", (string)($myProject->IdeenTitle ?? ''), (string)($config->AdminNewProject ?? ''));
+	        $messageBody = str_replace("{PROJECT_STATUS}", (string)($myProject->Status ?? ''), $messageBody);
+	        $messageBody = str_replace("{PROJECT_NUMBER}", (string)($myProject->ProjectNumber ?? ''), $messageBody);
+	        $projectDetails = '<p>
+	        						<strong>Project details:</strong><br />
+	        					</p>
+	        					<p>
+	        						'.$myProject->Anrede.', '.$myProject->Vorname.', '.$myProject->Nachname.'
+	        					</p>
+	        					<p>
+	        						'.$myProject->PLZ.', '.$myProject->Ort.'
+	        					</p>
+	        					<p>
+	        						'.$myProject->KurzBeschreibung.'
+	        					</p>
+	        					';
+	        $messageBody = str_replace("{PROJECT_DETAILS}", (string)($projectDetails ?? ''), $messageBody);
+		    $email->setBody($messageBody);
+	        
+			
+			$getMembers = Member::get()
+                ->filter([
+                    'Email:not' => ['admin', 'admin1'],
+                    'NoAdminEmails' => 0,
+                    'Groups.ID' => 2
+                ])
+            ; //->exclude(["Email"=>"admin", "Email"=>"admin1"])->innerJoin("Group_Members", "MemberID=Member.ID AND GroupID='2'");
+			$allEmails = "";
+	        if ($getMembers->count() > 0) {
+	        	foreach ($getMembers as $key => $value) {
+	        		if(filter_var($value->Email, FILTER_VALIDATE_EMAIL)) {
+                        $allEmails .= $value->Email."<br>";
+                        $email->setTo($value->Email);
+                        //$email->setTo("kalakotra@gmail.com");
+                        $email->send();
+                    }
+	        	}
+	        }
     }
 
     private function mergeStepData($steps): array

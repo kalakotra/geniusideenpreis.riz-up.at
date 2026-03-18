@@ -102,8 +102,8 @@ class RegistrationForm_Step1 extends MultiFormStep {
                 HeaderField::create('header', 'Teammitglied 1', 4),
                 OptionsetField::create("Anrede1", "Anrede", singleton('Project')->dbObject('Anrede1')->enumValues()),
                 TextField::create('AkademischerGrad1', 'Titel vorangestellt'),
-                TextField::create('Vorname1', 'Vorname'),
-                TextField::create('Nachname1', 'Nachname'),
+                TextField::create('Vorname1', 'Vorname *'),
+                TextField::create('Nachname1', 'Nachname *'),
                 TextField::create('AkademischerGrad1Sufix', 'Titel nachgestellt'),
             )
                 ->addExtraClass('no-grid')
@@ -114,8 +114,8 @@ class RegistrationForm_Step1 extends MultiFormStep {
                 HeaderField::create('header', 'Teammitglied 2', 4),
                 OptionsetField::create("Anrede2", "Anrede", singleton('Project')->dbObject('Anrede2')->enumValues()),
                 TextField::create('AkademischerGrad2', 'Titel vorangestellt'),
-                TextField::create('Vorname2', 'Vorname'),
-                TextField::create('Nachname2', 'Nachname'),
+                TextField::create('Vorname2', 'Vorname *'),
+                TextField::create('Nachname2', 'Nachname *'),
                 TextField::create('AkademischerGrad2Sufix', 'Titel nachgestellt'),
             )
                 ->addExtraClass('no-grid')
@@ -126,8 +126,8 @@ class RegistrationForm_Step1 extends MultiFormStep {
                 HeaderField::create('header', 'Teammitglied 3', 4),
                 OptionsetField::create("Anrede3", "Anrede", singleton('Project')->dbObject('Anrede3')->enumValues()),
                 TextField::create('AkademischerGrad3', 'Titel vorangestellt'),
-                TextField::create('Vorname3', 'Vorname'),
-                TextField::create('Nachname3', 'Nachname'),
+                TextField::create('Vorname3', 'Vorname *'),
+                TextField::create('Nachname3', 'Nachname *'),
                 TextField::create('AkademischerGrad3Sufix', 'Titel nachgestellt'),
             )
                 ->addExtraClass('no-grid')
@@ -138,8 +138,8 @@ class RegistrationForm_Step1 extends MultiFormStep {
                 HeaderField::create('header', 'Teammitglied 4', 4),
                 OptionsetField::create("Anrede4", "Anrede", singleton('Project')->dbObject('Anrede4')->enumValues()),
                 TextField::create('AkademischerGrad4', 'Titel vorangestellt'),
-                TextField::create('Vorname4', 'Vorname'),
-                TextField::create('Nachname4', 'Nachname'),
+                TextField::create('Vorname4', 'Vorname *'),
+                TextField::create('Nachname4', 'Nachname *'),
                 TextField::create('AkademischerGrad4Sufix', 'Titel nachgestellt'),
             )
                 ->addExtraClass('no-grid')
@@ -150,8 +150,8 @@ class RegistrationForm_Step1 extends MultiFormStep {
                 HeaderField::create('header', 'Teammitglied 5', 4),
                 OptionsetField::create("Anrede5", "Anrede", singleton('Project')->dbObject('Anrede5')->enumValues()),
                 TextField::create('AkademischerGrad5', 'Titel vorangestellt'),
-                TextField::create('Vorname5', 'Vorname'),
-                TextField::create('Nachname5', 'Nachname'),
+                TextField::create('Vorname5', 'Vorname *'),
+                TextField::create('Nachname5', 'Nachname *'),
                 TextField::create('AkademischerGrad5Sufix', 'Titel nachgestellt'),
             )
                 ->addExtraClass('no-grid')

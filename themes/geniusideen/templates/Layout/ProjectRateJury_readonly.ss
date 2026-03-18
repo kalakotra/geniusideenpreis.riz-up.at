@@ -10,7 +10,7 @@
 </div>
 
 <form id="rateForm" data-maxpoints="$getActiveCompetition.MaxPoints">
-	<% loop getActiveCompetition.CompetitionCriteria %>
+	<% loop getActiveCompetition.CompetitionCriteria.sort('PointWeight DESC') %>
 		<div class="<% if Odd %>lightBlue<% end_if %> my-3 CompetitionCriteriaHolder">
 			<div class="container">
 				<div class="row pt-2 pb-2">
@@ -20,7 +20,7 @@
 					<div class="col-12 col-md-6">
 						<span>
 							$Title
-							<img src="$ThemeDir/images/info_icon.png" width="20" class=" infoIcon" title="
+							<img src="$themedResourceURL(/images/info_icon.png)" width="20" class=" infoIcon" title="
 								$Description
 							" data-toggle="tooltip" data-html="true" />
 						</span>
@@ -30,7 +30,7 @@
 					<div class="col-12 col-md-3">
 						<span>
 							Bewertung 
-							<img src="$ThemeDir/images/info_icon.png" width="20" class=" infoIcon" title="
+							<img src="$themedResourceURL(/images/info_icon.png)" width="20" class=" infoIcon" title="
 								<b>1 Punkt ($Point1Title)</b> {$Point1Text}<br />
 								<b>2 Punkte ($Point2Title)</b> {$Point2Text}<br />
 								<b>3 Punkte ($Point3Title)</b> {$Point3Text}<br />
@@ -79,7 +79,7 @@
 				</div>
 				<div class="col-12 col-md-6">
 					<span>Gesamtkommentar * 
-					<img src="$ThemeDir/images/info_icon.png" width="20" class=" infoIcon" title="
+					<img src="$themedResourceURL(/images/info_icon.png)" width="20" class=" infoIcon" title="
 							<strong>Bitte geben Sie uns aus Jurorensicht in 2-3 Sätzen</strong><br />
 							a) eine Kurzfassung des eingereichten Projektes sowie<br />
 							b) Ihr Fazit/Begründung für Ihre Bewertung ab.

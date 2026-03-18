@@ -35,7 +35,7 @@ class CustomEmail extends DataObject {
 	        $email->setFrom("no-reply@riz.at"); 
 	        $email->setSubject($this->Title); 
 	        //$email->setBody($this->Text);
-	        $myText = $this->Text;
+	        $myText = (string)($this->Text ?? '');
 
 	        $what = array("{ANREDE}", "{DEGREE}", "{VORNAME}", "{NACHNAME}", "{GRUSSFORMEL}");
 	        $with = array("Herr", "prof.", "Max", "Mustermann", "Sehr geehrter Herr");
@@ -55,7 +55,7 @@ class CustomEmail extends DataObject {
 		        $email->setFrom("no-reply@riz.at"); 
 		        $email->setSubject($this->Title); 
 		        //$email->setBody($this->Text);
-		        $myText = $this->Text;
+		        $myText = (string)($this->Text ?? '');
 
 		        $what = array("{ANREDE}", "{DEGREE}", "{VORNAME}", "{NACHNAME}", "{DEGREESUFIX}", "{GRUSSFORMEL}");
 

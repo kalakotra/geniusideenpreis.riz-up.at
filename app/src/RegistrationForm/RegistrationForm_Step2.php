@@ -29,6 +29,7 @@ class RegistrationForm_Step2 extends MultiFormStep {
             TextField::create('IdeenTitle', 'Titel der Idee *'),
                 
             DropdownField::create('KategoriesID', 'Kategorie *', $myCompetition->Kategorie()->map())
+                ->setEmptyString('Bitte wählen')
                 ->setDescription('Wir behalten uns vor, Einreichungen bei Bedarf in einer anderen Kategorie zu nominieren.'),
             TextareaField::create('KurzBeschreibung', 'Ideen-Kurz-Beschreibung (max. 5 Sätze) *')
                 ->addExtraClass('no-grid')
@@ -42,7 +43,7 @@ class RegistrationForm_Step2 extends MultiFormStep {
                 ['1'=>'Ja', '0'=>'Nein', '2'=> 'im Laufen']
             )->addExtraClass('no-grid'),
             Wrapper::create(
-                LiteralField::create('', '<small>Bitte im nächsten Schritt die Unterlagen dazu hochloden.</small>'),
+                LiteralField::create('', '<small>Bitte im nächsten Schritt die Unterlagen dazu hochladen.</small>'),
                 
             )
                 ->addExtraClass('no-grid pt-0')

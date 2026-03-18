@@ -234,9 +234,13 @@ use UncleCheese\Dropzone\FileAttachmentField;
                 $email->setFrom("genius@riz-up.at");
 
                 $email->setSubject($config->MemberNewProjectTitle); 
-                $messageBody = str_replace("{PROJECT_TITLE}", $myProject->IdeenTitle, $config->MemberNewProject);
+                $messageBody = str_replace(
+                    "{PROJECT_TITLE}",
+                    (string)($myProject->IdeenTitle ?? ''),
+                    (string)($config->MemberNewProject ?? '')
+                );
 
-                $messageBody = str_replace("{PROJECT_STATUS}", $myProject->Status, $messageBody);
+                $messageBody = str_replace("{PROJECT_STATUS}", (string)($myProject->Status ?? ''), $messageBody);
                 
                 $email->setBody($messageBody);
                 
@@ -893,7 +897,8 @@ use UncleCheese\Dropzone\FileAttachmentField;
             //$this->save($data);
             $currentStep = $this->getCurrentStep($data['MultiFormSessionID'], $data['StepID']);
             if (is_array($data)) {
-                $currentStep->saveData($data);
+
+                $fileToBig = false;
 
                 // move files to temp folder and save the file references to the database 
                 // RegistrationFormFiles
@@ -904,6 +909,10 @@ use UncleCheese\Dropzone\FileAttachmentField;
                             $fileName = $_FILES['Dokumente']['name'][$key];
                             $multiFormSessionID = $currentStep->SessionID;
                             $this->saveTempFile($multiFormSessionID, $fileGroup, $fileName, $tmpName);
+                            
+                            if ($_FILES['Dokumente']['size'][$key] > 5 * 1024 * 1024) { // 5MB
+                                $fileToBig = true;
+                            }
                         }
                     }
                 }
@@ -915,6 +924,10 @@ use UncleCheese\Dropzone\FileAttachmentField;
                             $fileName = $_FILES['Lebenslaufs']['name'][$key];
                             $multiFormSessionID = $currentStep->SessionID;
                             $this->saveTempFile($multiFormSessionID, $fileGroup, $fileName, $tmpName);
+                            
+                            if ($_FILES['Lebenslaufs']['size'][$key] > 5 * 1024 * 1024) { // 5MB
+                                $fileToBig = true;
+                            }
                         }
                     }
                 }
@@ -926,8 +939,18 @@ use UncleCheese\Dropzone\FileAttachmentField;
                             $fileName = $_FILES['Urkunde']['name'][$key];
                             $multiFormSessionID = $currentStep->SessionID;
                             $this->saveTempFile($multiFormSessionID, $fileGroup, $fileName, $tmpName);
+
+                            if ($_FILES['Urkunde']['size'][$key] > 5 * 1024 * 1024) { // 5MB
+                                $fileToBig = true;
+                            }
                         }
                     }
+                }
+
+                if ($fileToBig) {
+                    $form->sessionMessage('Dateien größer als 5MB konnten nicht hochgeladen werden.', 'bad');
+                } else {
+                    $currentStep->saveData($data);
                 }
 
             }

@@ -92,7 +92,7 @@ class Bewertung extends DataObject {
 	public function onBeforeWrite() {
 		parent::onBeforeWrite();
 
-		$this->InnovationsKommentar = strip_tags($this->InnovationsKommentar??'');
+		$this->InnovationsKommentar = strip_tags((string)($this->InnovationsKommentar ?? ''));
 	}
 
 	public function onAfterWrite() {

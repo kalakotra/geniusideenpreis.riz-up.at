@@ -22,13 +22,13 @@
 				<div class="projectJuryDocuments">
 					<% loop Document %>
 						<div class="documentBlock">
-							<img src="$ThemeDir/images/info_icon.png" title="$Member.Name"/>
+							<img src="$themedResourceURL(/images/info_icon.png)" title="$Member.Name"/>
 							<a href="$Document.URL" target="_blank">$Document.Name</a>
 							<div >
 								$Description
 							</div>
 							<% if isOwner %>
-								<a href="$Top.Link/deleteDocument/$ID" class="documentDeleteLink youSure hideJuryLink"  title="Information löschen"><img src="$ThemeDir/images/delete.png" /></a>
+								<a href="$Top.Link/deleteDocument/$ID" class="documentDeleteLink youSure hideJuryLink"  title="Information löschen"><img src="$themedResourceURL(/images/delete.png)" /></a>
 							<% end_if %>
 						</div>
 					<% end_loop %>
@@ -37,13 +37,13 @@
 				<div class="projectJuryDocuments">
 					<% loop JuryLink %>
 						<div class="documentBlock">
-							<img src="$ThemeDir/images/info_icon.png" title="$Member.Name"/>
+							<img src="$themedResourceURL(/images/info_icon.png)" title="$Member.Name"/>
 							<a href="$URL" target="_blank">$Title</a>
 							<div >
 								$Description
 							</div>
 							<% if isOwner %>
-								<a href="$Top.Link/deleteJuryLink/$ID" class="documentDeleteLink youSure hideJuryLink" title="Information löschen"><img src="$ThemeDir/images/delete.png" /></a>
+								<a href="$Top.Link/deleteJuryLink/$ID" class="documentDeleteLink youSure hideJuryLink" title="Information löschen"><img src="$themedResourceURL(/images/delete.png)" /></a>
 							<% end_if %>
 						</div>
 					<% end_loop %>

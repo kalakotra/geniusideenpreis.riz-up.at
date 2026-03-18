@@ -83,10 +83,10 @@ class RegistrationForm_Step3 extends MultiFormStep {
         $upload1->getValidator()->allowedExtensions = array('pdf', 'doc', 'docx', 'jpg', 'jpeg', 'gif', 'mp3', 'mp4', 'xls', 'xlsx', 'ppt', 'pps', 'pptx');
         $upload1->getValidator()->setAllowedMaxFileSize('5m');
 
-        $upload2->getValidator()->allowedExtensions = array('pdf', 'doc', 'docx', 'ppt', 'pptx');
+        $upload2->getValidator()->allowedExtensions = array('pdf', 'doc', 'docx');
         $upload2->getValidator()->setAllowedMaxFileSize('5m');
 
-        $upload3->getValidator()->allowedExtensions = array('pdf', 'doc', 'docx', 'ppt', 'pptx');
+        $upload3->getValidator()->allowedExtensions = array('pdf', 'doc', 'docx');
         $upload3->getValidator()->setAllowedMaxFileSize('5m');
 
 

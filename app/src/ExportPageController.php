@@ -65,7 +65,22 @@ class ExportPageController extends PageController {
 
             'OffiziellerPlatz' => 'Int',
 
-            'AdminKomentar' => 'HTMLText'
+            'AdminKomentar' => 'HTMLText',
+
+            // additional fields 2026
+            'WarumEinzigartig' => 'Text',
+            'IdeeGeschuetzt' => 'Int', // 0 = Nein, 1 = Ja, 2 = In Planung
+            'Schutzart' => 'Varchar(255)',
+            'IdeeRealisiert' => 'Int', // 0 = Nein, 1 = Ja
+            'Umsetzungsgrad' => 'Text',
+            'Selbststaendig' => 'Int', // 0 = Nein, 1 = Ja
+            'SelbststaendigSeit' => 'Varchar(255)',
+            'Zielgruppen' => 'Text',
+            'Einnahmequellen' => 'Text',
+            'MarktChancenRisiken' => 'Text',
+            'Wachstumsplanung' => 'Int', // 0 = Nein, 1 = Ja
+            'WachstumsplanungDetails' => 'Text',
+            'MehrwertFuerNiederoesterreich' => 'Text'
 
 
         );
@@ -117,7 +132,7 @@ class ExportPageController extends PageController {
 
             'OffiziellerPlatz' => 'Offizieller Platz',
 
-            'AdminKomentar' => 'Admin-Kommentar'/*,
+            'AdminKomentar' => 'Admin-Kommentar',/*
             'Schule' => 'Schule',
             'ProfessorAkademischerGrad' => 'Professor Titel vorangestellt',
             'ProfessorAkademischerGradSufix' => 'Professor Titel nachgestellt',
@@ -125,6 +140,21 @@ class ExportPageController extends PageController {
             'ProfessorNachname' => 'Professor Nachname',
             'ProfessorTelefon' => 'Professor Telefon',
             'ProfessorEmail' => 'Professor Email'*/
+
+            // additional fields 2026
+            'WarumEinzigartig' => 'Warum sollten Kunden bei Ihnen kaufen, was macht Ihre Idee einzigartig?',
+            'IdeeGeschuetzt' => 'Haben Sie die Idee geschützt?', // 0 = Nein, 1 = Ja, 2 = In Planung
+            'Schutzart' => 'Schutzart',
+            'IdeeRealisiert' => 'Wurde die Idee bereits realisiert?', // 0 = Nein, 1 = Ja
+            'Umsetzungsgrad' => 'Umsetzungsgrad',
+            'Selbststaendig' => 'Sind Sie selbstständig?', // 0 = Nein, 1 = Ja
+            'SelbststaendigSeit' => 'Seit wann sind Sie selbstständig?',
+            'Zielgruppen' => 'Zielgruppen',
+            'Einnahmequellen' => 'Einnahmequellen',
+            'MarktChancenRisiken' => 'Chancen und Risiken',
+            'Wachstumsplanung' => 'Wachstumsplanung', // 0 = Nein, 1 = Ja
+            'WachstumsplanungDetails' => 'Wie soll dieses Wachstum aussehen?',
+            'MehrwertFuerNiederoesterreich' => 'Was ist der Mehrwert Ihrer Idee für Niederösterreich?'
 
 
         );
@@ -201,13 +231,21 @@ class ExportPageController extends PageController {
                         //'Durchwahl' => 'Durchwahl',
                         */
 
-                        $fileData .= str_replace($what, $with, strip_tags($pValue->Vorwahl ." ". $pValue->Telefonnummer ." ". $pValue->Durchwahl)).$separator;
+                        $fileData .= str_replace($what, $with, strip_tags((string)(($pValue->Vorwahl ." ". $pValue->Telefonnummer ." ". $pValue->Durchwahl) ?? ''))).$separator;
                     } else if ($value == "Kategorie") {
-                        $fileData .= str_replace($what, $with, strip_tags($pValue->Kategories()->Title)).$separator;
+                        $fileData .= str_replace($what, $with, strip_tags((string)($pValue->Kategories()->Title ?? ''))).$separator;
                     } else if ($value == "TeamteilnehmerInnen") {
-                        $fileData .= str_replace($what, $with, strip_tags($pValue->myTeam())).$separator;
+                        $fileData .= str_replace($what, $with, strip_tags((string)($pValue->myTeam() ?? ''))).$separator;
+                    } else if ($value == "IdeeGeschuetzt" || $value == "IdeeRealisiert" || $value == "Selbststaendig" || $value == "Wachstumsplanung") {
+                        $optionValue = "Nein";
+                        if ($pValue->IdeeGeschuetzt == 1) {
+                            $optionValue = "Ja";
+                        } else if ($pValue->IdeeGeschuetzt == 2) {
+                            $optionValue = "In Planung";
+                        }
+                        $fileData .= str_replace($what, $with, strip_tags((string)($optionValue ?? ''))).$separator;
                     } else if ($value == "Bezirk") {
-                        $fileData .= str_replace($what, $with, strip_tags($pValue->bezirkName($pValue->Bezirk))).$separator;
+                        $fileData .= str_replace($what, $with, strip_tags((string)($pValue->bezirkName($pValue->Bezirk) ?? ''))).$separator;
                     } else if ($value == "Bewertung") {
                         //CompetitionCriteriaAdmin - AdminPointsOverrule
                         if ($pValue->Competition()->CompetitionCriteria()->exists()) {
@@ -264,7 +302,7 @@ class ExportPageController extends PageController {
                     } else if ($value == "JuryPoints" || $value == "AdminPoints") {
                         $fileData .= number_format($pValue->$value, 2, ",", ".").$separator;
                     } else {
-                        $fileData .= str_replace($what, $with, strip_tags($pValue->$value)).$separator;
+                        $fileData .= str_replace($what, $with, strip_tags((string)($pValue->$value ?? ''))).$separator;
                     }
                     
                     
@@ -321,9 +359,9 @@ class ExportPageController extends PageController {
             foreach ($myProjects as $pKey => $pValue) {
                 foreach ($data["ExportFields"] as $key => $value) {
                     if ($value == "Kategorie") {
-                        $fileData .= str_replace($what, $with, strip_tags($pValue->Kategories()->Title)).$separator;
+                        $fileData .= str_replace($what, $with, strip_tags((string)($pValue->Kategories()->Title ?? ''))).$separator;
                     } else {
-                        $fileData .= str_replace($what, $with, strip_tags($pValue->$value)).$separator;
+                        $fileData .= str_replace($what, $with, strip_tags((string)($pValue->$value ?? ''))).$separator;
                     }
                     
                     
@@ -397,7 +435,21 @@ class ExportPageController extends PageController {
             'ProfessorVorname' => 'Professor Vorname',
             'ProfessorNachname' => 'Professor Nachname',
             'ProfessorTelefon' => 'Professor Telefon',
-            'ProfessorEmail' => 'Professor Email'
+            'ProfessorEmail' => 'Professor Email',
+
+            'WarumEinzigartig' => 'Warum sollten Kunden bei Ihnen kaufen, was macht Ihre Idee einzigartig?',
+            'IdeeGeschuetzt' => 'Haben Sie die Idee geschützt?', // 0 = Nein, 1 = Ja, 2 = In Planung
+            'Schutzart' => 'Schutzart',
+            'IdeeRealisiert' => 'Wurde die Idee bereits realisiert?', // 0 = Nein, 1 = Ja
+            'Umsetzungsgrad' => 'Umsetzungsgrad',
+            'Selbststaendig' => 'Sind Sie selbstständig?', // 0 = Nein, 1 = Ja
+            'SelbststaendigSeit' => 'Seit wann sind Sie selbstständig?',
+            'Zielgruppen' => 'Zielgruppen',
+            'Einnahmequellen' => 'Einnahmequellen',
+            'MarktChancenRisiken' => 'Chancen und Risiken',
+            'Wachstumsplanung' => 'Wachstumsplanung', // 0 = Nein, 1 = Ja
+            'WachstumsplanungDetails' => 'Wie soll dieses Wachstum aussehen?',
+            'MehrwertFuerNiederoesterreich' => 'Was ist der Mehrwert Ihrer Idee für Niederösterreich?'
 
 
         );

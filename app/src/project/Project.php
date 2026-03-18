@@ -1110,7 +1110,7 @@ class Project extends DataObject {
 	public function myKurzBeschreibung() {
 		$what = array("\n", "\r");
 		$with = array(" ", " ");
-		$where = strip_tags($this->KurzBeschreibung);
+		$where = strip_tags((string)($this->KurzBeschreibung ?? ''));
 
 		return str_replace($what, $with, $where);
 	}
@@ -1256,16 +1256,16 @@ class Project extends DataObject {
 			 
 	        $email->setFrom("genius@riz-up.at"); 
 	        $email->setSubject($config->JuryNewProjectTitle); 
-	        $messageBody = str_replace("{PROJECT_TITLE}", $this->IdeenTitle, $config->JuryNewProject);
-	        $messageBody = str_replace("{PROJECT_STATUS}", $this->Status, $messageBody);
-	        $messageBody = str_replace("{PROJECT_NUMBER}", $this->ProjectNumber, $messageBody);
+	        $messageBody = str_replace("{PROJECT_TITLE}", (string)($this->IdeenTitle ?? ''), (string)($config->JuryNewProject ?? ''));
+	        $messageBody = str_replace("{PROJECT_STATUS}", (string)($this->Status ?? ''), $messageBody);
+	        $messageBody = str_replace("{PROJECT_NUMBER}", (string)($this->ProjectNumber ?? ''), $messageBody);
 		    
 	        
 			if ($this->Jury1ID > 0 && $this->SendEmailsJury1 == "0") {
 				
 		        $email->setTo($this->Jury1()->Email);
 		        //$email->setTo("kalakotra@gmail.com");
-				$messageBody1 = str_replace("{JURY_NAME}", $this->Jury1()->FirstName, $messageBody);
+				$messageBody1 = str_replace("{JURY_NAME}", (string)($this->Jury1()->FirstName ?? ''), $messageBody);
 				$email->setBody($messageBody1);
 		        $email->send();
 			}
@@ -1273,7 +1273,7 @@ class Project extends DataObject {
 			if ($this->Jury2ID > 0 && $this->SendEmailsJury2 == "0") {
 				$email->setTo($this->Jury2()->Email);
 				//$email->setTo("kalakotra@gmail.com");
-				$messageBody2 = str_replace("{JURY_NAME}", $this->Jury2()->FirstName, $messageBody);
+				$messageBody2 = str_replace("{JURY_NAME}", (string)($this->Jury2()->FirstName ?? ''), $messageBody);
 				$email->setBody($messageBody2);
 		        $email->send();
 			}
@@ -1294,7 +1294,7 @@ class Project extends DataObject {
 
 
 
-
+		
 		if ($this->Status != "geprüft&freigegeben" && ($this->Jury1ID != 0 || $this->Jury2ID != 0)) {
 
 			$config = SiteConfig::current_site_config(); 
@@ -1303,9 +1303,9 @@ class Project extends DataObject {
 			 
 	        $email->setFrom("genius@riz-up.at"); 
 	        $email->setSubject($config->JuryProjectStatusTitle); 
-	        $messageBody = str_replace("{PROJECT_TITLE}", $this->IdeenTitle, $config->JuryProjectStatus);
-	        $messageBody = str_replace("{PROJECT_STATUS}", $this->Status, $messageBody);
-	        $messageBody = str_replace("{PROJECT_NUMBER}", $this->ProjectNumber, $messageBody);
+	        $messageBody = str_replace("{PROJECT_TITLE}", (string)($this->IdeenTitle ?? ''), (string)($config->JuryProjectStatus ?? ''));
+	        $messageBody = str_replace("{PROJECT_STATUS}", (string)($this->Status ?? ''), $messageBody);
+	        $messageBody = str_replace("{PROJECT_NUMBER}", (string)($this->ProjectNumber ?? ''), $messageBody);
 		    $email->setBody($messageBody);
 	        
 			if ($this->Jury1()->exists()) {
@@ -1339,55 +1339,9 @@ class Project extends DataObject {
 		    //$email->send();
 		}
 
+
+		// this will be done in registration form class after project is added
 		if ($this->Completed == "1" && $this->Status == "neu" && $this->SendEmailsAdmin == "0") {
-
-			$config = SiteConfig::current_site_config(); 
-
-			$email = new Email();
-			 
-	        $email->setFrom("genius@riz-up.at"); 
-	        $email->setSubject($config->AdminNewProjectTitle ." ". $this->IdeenTitle); 
-	        $messageBody = str_replace("{PROJECT_TITLE}", $this->IdeenTitle, $config->AdminNewProject);
-	        $messageBody = str_replace("{PROJECT_STATUS}", $this->Status, $messageBody);
-	        $messageBody = str_replace("{PROJECT_NUMBER}", $this->ProjectNumber, $messageBody);
-	        $projectDetails = '<p>
-	        						<strong>Project details:</strong><br />
-	        					</p>
-	        					<p>
-	        						'.$this->Anrede.', '.$this->Vorname.', '.$this->Nachname.'
-	        					</p>
-	        					<p>
-	        						'.$this->PLZ.', '.$this->Ort.'
-	        					</p>
-	        					<p>
-	        						'.$this->KurzBeschreibung.'
-	        					</p>
-	        					';
-	        $messageBody = str_replace("{PROJECT_DETAILS}", $projectDetails, $messageBody);
-		    $email->setBody($messageBody);
-	        
-			
-			$getMembers = Member::get()->exclude(["Email"=>"admin", "Email"=>"admin1"])->innerJoin("Group_Members", "MemberID=Member.ID AND GroupID='2'");
-			$allEmails = "";
-	        if ($getMembers->count() > 0) {
-	        	foreach ($getMembers as $key => $value) {
-	        		if (in_array($value->Email, array("admin", "admin1")) || $value->NoAdminEmails == 1) {
-
-                    } else {
-		        		if(filter_var($value->Email, FILTER_VALIDATE_EMAIL)) {
-		        			$allEmails .= $value->Email."<br>";
-			        		$email->setTo($value->Email);
-			        		//$email->setTo("kalakotra@gmail.com");
-			        		$email->send();
-		        		} else {
-		        			/*$email->setBody("notsended to:".$value->Email."<br ><br>ProjectID:".$this->ID."<br><br>".$messageBody);
-		        			$email->setTo("kalakotra@gmail.com");
-			        		$email->send();*/
-		        		}
-	        		}
-	        		
-	        	}
-	        }
 
 			$this->Jury1ID = 0;
 			$this->Jury2ID = 0;
@@ -1396,10 +1350,6 @@ class Project extends DataObject {
 			$this->SendEmailsJury1 = 0;
 			$this->SendEmailsJury2 = 0;
 			$this->SendEmailsAdmin = 1;
-
-			//$email->setBody("admins:".$allEmails."<br ><br>ProjectID:".$this->ID."<br><br>".$messageBody);
-			//$email->setTo("kalakotra@gmail.com");
-		    //$email->send();
 		}
 
 		if ($this->ProjectNumber == "" && $this->Completed == 1) {
@@ -1461,7 +1411,7 @@ class Project extends DataObject {
 		}
 
 		if ($stripHtml == true) {
-			$myHtml = strip_tags($myHtml);
+			$myHtml = strip_tags((string)($myHtml ?? ''));
 		} 
 		return DBField::create_field('HTMLVarchar', $myHtml);
 	}
@@ -1506,7 +1456,7 @@ class Project extends DataObject {
 	public function myAdminKomentar() {
 		$what = array("\n", "\r");
 		$with = array(" ", " ");
-		$where = strip_tags($this->AdminKomentar);
+		$where = strip_tags((string)($this->AdminKomentar ?? ''));
 
 		return str_replace($what, $with, $where);
 	}

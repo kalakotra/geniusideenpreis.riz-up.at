@@ -70,6 +70,17 @@ jQuery.noConflict();
 			}
 		});
 
+		// Teammitglieder required fields onchange & onload
+		$('#RegistrationForm_RegistrationForm_Teammitglieder').on("change", function() {
+			$('#RegistrationForm_RegistrationForm_Vorname1, #RegistrationForm_RegistrationForm_Nachname1, #RegistrationForm_RegistrationForm_Vorname2, #RegistrationForm_RegistrationForm_Nachname2, #RegistrationForm_RegistrationForm_Vorname3, #RegistrationForm_RegistrationForm_Nachname3, #RegistrationForm_RegistrationForm_Vorname4, #RegistrationForm_RegistrationForm_Nachname4, #RegistrationForm_RegistrationForm_Vorname5, #RegistrationForm_RegistrationForm_Nachname5').removeAttr("required");
+			if ($(this).val() > 0) {
+				for (var i = 1; i <= $(this).val(); i++) {
+					$('#RegistrationForm_RegistrationForm_Vorname' + i + ', #RegistrationForm_RegistrationForm_Nachname' + i).attr("required", "required");
+				}
+			}
+		});
+		$('#RegistrationForm_RegistrationForm_Teammitglieder').trigger("change");
+
 
  		/*$("#AktInfoCheckbox").on("change", function() {
 			if ($("#agreeBox input:checked").length == 2) {
