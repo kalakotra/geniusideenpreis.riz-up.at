@@ -5,3 +5,6 @@
 /ideen_ss4.sql.gz
 /public/assets
 /vendor
+
+/.graphql-generated
+/.graphql-generated/admin
