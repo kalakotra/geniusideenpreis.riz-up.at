@@ -2074,7 +2074,9 @@ class Project extends DataObject {
 		return $fields;
 	}
 
-
+	public function bezirkNameExport() {
+		return $this->bezirkName($this->Bezirk);
+	}
 
 	public function bezirkName($bezirkNr = 0) {
 		$myRegions = $this->BezirkArray();

@@ -68,6 +68,16 @@ class CompetitionExportController extends \SilverStripe\Control\Controller
                 continue;
             }
 
+            if ($field === 'Bezirk') {
+                $dataArray[] = $this->resolveBezirkValue($dataObject);
+                continue;
+            }
+
+            if ($field === 'Kategorie') {
+                $dataArray[] = $dataObject->Kategories()->Title ?? '';
+                continue;
+            }
+
             if ($field === 'Created' || $field === 'LastEdited') {
                 $dataArray[] = $dataObject->dbObject($field)->Nice();
                 continue;
@@ -220,6 +230,15 @@ class CompetitionExportController extends \SilverStripe\Control\Controller
             },
             $this->getFields($firstObject)
         );
+    }
+
+    protected function resolveBezirkValue($dataObject)
+    {
+        try {
+            return $dataObject->bezirkNameExport() ?? '';
+        } catch (\Throwable $e) {
+            return '';
+        }
     }
 
     protected function resolveBewertungBlockCount($dataObjects)
