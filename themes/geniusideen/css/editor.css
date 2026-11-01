@@ -1,0 +1,86 @@
+/**
+ * This support file is used to style the WYSIWYG editor in the CMS
+ */
+
+
+a {
+	color: #124989;
+}
+	a:hover {
+		color: #124989;
+	}
+
+.blue-color {
+	color: #124989;
+}
+
+.smallText {
+	font-size: 0.875rem;
+}
+
+h1 {
+	font-size: 1.5rem;
+	font-weight: bold;
+	color: #124989;
+}
+
+h2 {
+	font-size: 1.125rem;
+	font-weight: bold;
+	color: #124989;
+}
+
+h3 {
+	font-size: 1.0625rem;
+	font-weight: bold;
+	color: #124989;
+}
+
+h4, h5, h6 {
+	font-size: 1rem;
+	font-weight: bold;
+	color: #124989;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+p img.left {
+    float: left;
+    max-width: 50%;
+    margin: 5px 20px 10px 0;
+}
+p img.right {
+    float: right;
+    max-width: 50%; /* Responsive width */
+    margin: 5px 0 10px 20px;
+}
+p img.leftAlone {
+    float: left;
+    margin-right: 100%;
+    margin-bottom: 10px;
+    clear: both;
+}
+p img.rightAlone {
+    float: right;
+    margin-left: 100%;
+    margin-bottom: 10px;
+    clear: both;
+}
+p img.center {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-bottom: 10px;
+    clear: both;
+}
+
+blockquote {
+  /*background: transparent url(../images/blockquote.png) no-repeat 0px 6px;*/
+  padding: 20px;
+  font-style: italic;
+  clear: both;
+}

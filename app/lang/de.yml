@@ -1,0 +1,399 @@
+de:
+  AnsprechPartner:
+    PLURALNAME: Ansprechperson
+    PLURALS:
+      one: 'An Ansprechperson'
+      other: '{count} Ansprechperson'
+    SINGULARNAME: Ansprechperson
+    db_Email: Email
+    db_Name: Name
+    db_SubPosition: 'Sub position'
+    db_Telephone: Telephone
+    has_one_Picture: Picture
+  AnsprechPartnerAdmin:
+    MENUTITLE: Ansprechperson
+  Auswertungen:
+    MENUTITLE: 'Jury finished'
+  Bewertung:
+    PLURALNAME: Bewertungs
+    PLURALS:
+      one: 'A Bewertung'
+      other: '{count} Bewertungs'
+    SINGULARNAME: Bewertung
+    db_GesamtKommentar: 'Gesamt kommentar'
+    db_InnovationsBewertung: 'Innovations bewertung'
+    db_InnovationsKommentar: 'Innovations kommentar'
+    db_InnovationsPunkte: 'Innovations punkte'
+    db_MarktBewertung: 'Markt bewertung'
+    db_MarktKommentar: 'Markt kommentar'
+    db_MarktPunkte: 'Markt punkte'
+    db_ProjektbezugKommentar: 'Projektbezug kommentar'
+    db_QualitatBewertung: 'Qualitat bewertung'
+    db_QualitatKommentar: 'Qualitat kommentar'
+    db_QualitatPunkte: 'Qualitat punkte'
+    db_Status: Status
+    db_UmsetzungsrelevanzBewertung: 'Umsetzungsrelevanz bewertung'
+    db_UmsetzungsrelevanzKommentar: 'Umsetzungsrelevanz kommentar'
+    db_UmsetzungsrelevanzPunkte: 'Umsetzungsrelevanz punkte'
+    db_WirtschaftsrelevanzBewertung: 'Wirtschaftsrelevanz bewertung'
+    db_WirtschaftsrelevanzKommentar: 'Wirtschaftsrelevanz kommentar'
+    db_WirtschaftsrelevanzPunkte: 'Wirtschaftsrelevanz punkte'
+    has_one_Jury: Jury
+    has_one_Project: Project
+    many_many_CompetitionCriteria: 'Competition criteria'
+  BewertungAdmin:
+    MENUTITLE: Bewertung
+  Competition:
+    PLURALNAME: Competitions
+    PLURALS:
+      one: 'A Competition'
+      other: '{count} Competitions'
+    SINGULARNAME: Competition
+    db_Active: Active
+    db_EmailSubject: 'Email subject'
+    db_EmailText: 'Email text'
+    db_HideFromMenu: 'Hide from menu'
+    db_MaxPoints: 'Max points'
+    db_SendEmailAfterSubmission: 'Send email after submission'
+    db_ShortCode: 'Short code'
+    db_Title: Title
+    many_many_CompetitionCriteria: 'Competition criteria'
+    many_many_Kategorie: Kategorie
+  CompetitionAdmin:
+    MENUTITLE: Competition
+  CompetitionCriteria:
+    PLURALNAME: 'Competition Criterias'
+    PLURALS:
+      one: 'A Competition Criteria'
+      other: '{count} Competition Criterias'
+    SINGULARNAME: 'Competition Criteria'
+    belongs_many_many_Bewertung: Bewertung
+    belongs_many_many_Competition: Competition
+    db_Description: Description
+    db_InternalTitle: 'Internal title'
+    db_Point1Text: 'Point1 text'
+    db_Point1Title: 'Point1 title'
+    db_Point2Text: 'Point2 text'
+    db_Point2Title: 'Point2 title'
+    db_Point3Text: 'Point3 text'
+    db_Point3Title: 'Point3 title'
+    db_Point4Text: 'Point4 text'
+    db_Point4Title: 'Point4 title'
+    db_PointWeight: 'Point weight'
+    db_Sort: Sort
+    db_Title: Title
+  CustomEmail:
+    PLURALNAME: 'Custom Emails'
+    PLURALS:
+      one: 'A Custom Email'
+      other: '{count} Custom Emails'
+    SINGULARNAME: 'Custom Email'
+    db_SendEmails: 'Send emails'
+    db_SendTest: 'Send test'
+    db_SendTo: 'Send to'
+    db_TestEmail: 'Test email'
+    db_Text: Text
+    db_Title: Title
+  CustomEmailAdmin:
+    MENUTITLE: Emails
+  CustomSiteConfig:
+    db_AdminNewProject: 'Admin new project'
+    db_AdminNewProjectTitle: 'Admin new project title'
+    db_AdminProjectRejected: 'Admin project rejected'
+    db_AdminProjectRejectedTitle: 'Admin project rejected title'
+    db_FooterText: 'Footer text'
+    db_JugendNewProject: 'Jugend new project'
+    db_JugendNewProjectTitle: 'Jugend new project title'
+    db_JuryNewMember: 'Jury new member'
+    db_JuryNewMemberTitle: 'Jury new member title'
+    db_JuryNewProject: 'Jury new project'
+    db_JuryNewProjectTitle: 'Jury new project title'
+    db_JuryProjectStatus: 'Jury project status'
+    db_JuryProjectStatusTitle: 'Jury project status title'
+    db_MemberNewProject: 'Member new project'
+    db_MemberNewProjectTitle: 'Member new project title'
+  Document:
+    PLURALNAME: Documents
+    PLURALS:
+      one: 'A Document'
+      other: '{count} Documents'
+    SINGULARNAME: Document
+    db_Description: Description
+    has_one_Document: Document
+    has_one_Member: Member
+    has_one_Project: Project
+  ExportPage:
+    PLURALNAME: 'Export Pages'
+    PLURALS:
+      one: 'An Export Page'
+      other: '{count} Export Pages'
+    SINGULARNAME: 'Export Page'
+  IncompleteAdmin:
+    MENUTITLE: 'Einreichung unfinished'
+  Jury:
+    PLURALNAME: Juries
+    PLURALS:
+      one: 'A Jury'
+      other: '{count} Juries'
+    SINGULARNAME: Jury
+  JuryAdmin:
+    MENUTITLE: Jury
+  JuryLink:
+    PLURALNAME: 'Jury Links'
+    PLURALS:
+      one: 'A Jury Link'
+      other: '{count} Jury Links'
+    SINGULARNAME: 'Jury Link'
+    db_Description: Description
+    db_Title: Title
+    db_URL: URL
+    has_one_Member: Member
+    has_one_Project: Project
+  JuryMemberExtension:
+    db_ActiveForCompetition: 'Active for competition'
+    db_AkademischerGrad: 'Akademischer grad'
+    db_Anmerkungen: Anmerkungen
+    db_Anrede: Anrede
+    db_EmailSended: 'Email sended'
+    db_Firma: Firma
+    db_Kuerzel: Kuerzel
+    db_NoAdminEmails: 'No admin emails'
+    db_Ort: Ort
+    db_PLZ: PLZ
+    db_Strasse: Strasse
+    db_Telefon: Telefon
+  JuryPage:
+    PLURALNAME: 'Jury Pages'
+    PLURALS:
+      one: 'A Jury Page'
+      other: '{count} Jury Pages'
+    SINGULARNAME: 'Jury Page'
+  JuryProjectInfo:
+    PLURALNAME: 'Jury Project Infos'
+    PLURALS:
+      one: 'A Jury Project Info'
+      other: '{count} Jury Project Infos'
+    SINGULARNAME: 'Jury Project Info'
+    db_Text: Text
+    has_one_Member: Member
+    has_one_Project: Project
+  JurysitzungAdmin:
+    MENUTITLE: 'Projekte - Jurysitzung'
+  Kategorie:
+    PLURALNAME: Kategories
+    PLURALS:
+      one: 'A Kategorie'
+      other: '{count} Kategories'
+    SINGULARNAME: Kategorie
+    belongs_many_many_Competition: Competition
+    db_Sort: Sort
+    db_Title: Title
+  Nominierte:
+    MENUTITLE: Nominierte
+  Page:
+    DESCRIPTION: 'Generic content page'
+    PLURALNAME: Pages
+    PLURALS:
+      one: 'A Page'
+      other: '{count} Pages'
+    SINGULARNAME: Page
+    has_one_AnsprechPartner: 'Ansprech partner'
+    has_one_WeitereInfo: 'Weitere info'
+  Project:
+    PLURALNAME: Projects
+    PLURALS:
+      one: 'A Project'
+      other: '{count} Projects'
+    SINGULARNAME: Project
+    db_Abteilung: Abteilung
+    db_ActuallInfo: 'Actuall info'
+    db_AdminKomentar: 'Admin komentar'
+    db_AdminKomentarExt: 'Admin komentar ext'
+    db_AdminPlace: 'Admin place'
+    db_AdminPoints: 'Admin points'
+    db_AdminWrited: 'Admin writed'
+    db_AkademischerGrad: 'Akademischer grad'
+    db_AkademischerGrad1: 'Akademischer grad1'
+    db_AkademischerGrad1Sufix: 'Akademischer grad1 sufix'
+    db_AkademischerGrad2: 'Akademischer grad2'
+    db_AkademischerGrad2Sufix: 'Akademischer grad2 sufix'
+    db_AkademischerGrad3: 'Akademischer grad3'
+    db_AkademischerGrad3Sufix: 'Akademischer grad3 sufix'
+    db_AkademischerGrad4: 'Akademischer grad4'
+    db_AkademischerGrad4Sufix: 'Akademischer grad4 sufix'
+    db_AkademischerGrad5: 'Akademischer grad5'
+    db_AkademischerGrad5Sufix: 'Akademischer grad5 sufix'
+    db_AkademischerGradSufix: 'Akademischer grad sufix'
+    db_Anrede: Anrede
+    db_Anrede1: Anrede1
+    db_Anrede2: Anrede2
+    db_Anrede3: Anrede3
+    db_Anrede4: Anrede4
+    db_Anrede5: Anrede5
+    db_Bezirk: Bezirk
+    db_CompetitionOrder: 'Competition order'
+    db_Completed: Completed
+    db_Durchwahl: Durchwahl
+    db_Einnahmequellen: Einnahmequellen
+    db_Email: Email
+    db_Firma: Firma
+    db_IdeeGeschuetzt: 'Idee geschuetzt'
+    db_IdeeRealisiert: 'Idee realisiert'
+    db_IdeenTitle: 'Ideen title'
+    db_InnovationsPunkte: 'Innovations punkte'
+    db_JuryPlace: 'Jury place'
+    db_JuryPoints: 'Jury points'
+    db_Jurysitzung: Jurysitzung
+    db_Kategorie: Kategorie
+    db_KurzBeschreibung: 'Kurz beschreibung'
+    db_MarktChancenRisiken: 'Markt chancen risiken'
+    db_MarktPunkte: 'Markt punkte'
+    db_MehrwertFuerNiederoesterreich: 'Mehrwert fuer niederoesterreich'
+    db_Nachname: Nachname
+    db_Nachname1: Nachname1
+    db_Nachname2: Nachname2
+    db_Nachname3: Nachname3
+    db_Nachname4: Nachname4
+    db_Nachname5: Nachname5
+    db_Nominierte: Nominierte
+    db_OffiziellerPlatz: 'Offizieller platz'
+    db_OldProjectNumber: 'Old project number'
+    db_Ort: Ort
+    db_OtherTeamMembers: 'Other team members'
+    db_PLZ: PLZ
+    db_Preisgeld1: Preisgeld1
+    db_Preisgeld2: Preisgeld2
+    db_Preisgeld3: Preisgeld3
+    db_ProjectNumber: 'Project number'
+    db_QualitatPunkte: 'Qualitat punkte'
+    db_Schutzart: Schutzart
+    db_Selbststaendig: Selbststaendig
+    db_SelbststaendigSeit: 'Selbststaendig seit'
+    db_SendEmails: 'Send emails'
+    db_SendEmailsAdmin: 'Send emails admin'
+    db_SendEmailsJury1: 'Send emails jury1'
+    db_SendEmailsJury2: 'Send emails jury2'
+    db_Status: Status
+    db_Strasse: Strasse
+    db_Telefonnummer: Telefonnummer
+    db_Umsetzungsgrad: Umsetzungsgrad
+    db_UmsetzungsrelevanzPunkte: 'Umsetzungsrelevanz punkte'
+    db_Vorname: Vorname
+    db_Vorname1: Vorname1
+    db_Vorname2: Vorname2
+    db_Vorname3: Vorname3
+    db_Vorname4: Vorname4
+    db_Vorname5: Vorname5
+    db_Vorwahl: Vorwahl
+    db_Wachstumsplanung: Wachstumsplanung
+    db_WachstumsplanungDetails: 'Wachstumsplanung details'
+    db_WarumEinzigartig: 'Warum einzigartig'
+    db_Website: Website
+    db_WettbewerbAufmerksam: 'Wettbewerb aufmerksam'
+    db_WirtschaftsrelevanzPunkte: 'Wirtschaftsrelevanz punkte'
+    db_Zielgruppen: Zielgruppen
+    has_many_Bewertung: Bewertung
+    has_many_Document: Document
+    has_many_JuryLink: 'Jury link'
+    has_many_JuryProjectInfo: 'Jury project info'
+    has_one_Competition: Competition
+    has_one_Jury1: Jury1
+    has_one_Jury2: Jury2
+    has_one_Jury3: Jury3
+    has_one_Kategories: Kategories
+    has_one_Lebenslauf: Lebenslauf
+    has_one_Sponsor1: Sponsor1
+    has_one_Sponsor2: Sponsor2
+    has_one_Sponsor3: Sponsor3
+    many_many_CompetitionCriteriaAdmin: 'Competition criteria admin'
+    many_many_Dokumente: Dokumente
+    many_many_Lebenslaufs: Lebenslaufs
+    many_many_Urkunden: Urkunden
+  ProjectAdmin:
+    MENUTITLE: Projekte
+  ProjectPage:
+    PLURALNAME: 'Project Pages'
+    PLURALS:
+      one: 'A Project Page'
+      other: '{count} Project Pages'
+    SINGULARNAME: 'Project Page'
+    db_Inactive: Inactive
+    db_InactiveText: 'Inactive text'
+    db_ProjectFinishedText: 'Project finished text'
+    db_ProjectPreviewText: 'Project preview text'
+    db_ProjectUploadFormTitle: 'Project upload form title'
+    db_Step1Text: 'Step1 text'
+    db_Step2Text: 'Step2 text'
+    db_Step3Text: 'Step3 text'
+    db_Step4Text: 'Step4 text'
+  SilverStripe\MultiForm\Models\MultiFormSession:
+    PLURALNAME: Mehrschritt-Formular-Sitzungen
+    PLURALS:
+      one: 'Eine Mehrschritt-Formular-Sitzung'
+      other: '{count} Mehrschritt-Formular-Sitzungen'
+    SINGULARNAME: Mehrschritt-Formular-Sitzung
+  SilverStripe\MultiForm\Models\MultiFormStep:
+    BACK: Zurück
+    NEXT: Weiter
+    PLURALNAME: Mehrschritt-Formular-Schritte
+    PLURALS:
+      one: 'Ein Mehrschritt-Formular-Schritt'
+      other: '{count} Mehrschritt-Formular-Schritte'
+    SINGULARNAME: Mehrschritt-Formular-Schritt
+    SUBMIT: Absenden
+  SilverStripe\MultiForm\MultiForm:
+    ProgressPercent: 'Sie haben {percent}% abgeschlossen ({completedSteps}/{totalSteps})'
+  SilverStripe\SiteConfig\SiteConfigLeftAndMain_SilverStripeNavigator:
+    EDIT: Edit
+  Sponsor:
+    PLURALNAME: Sponsors
+    PLURALS:
+      one: 'A Sponsor'
+      other: '{count} Sponsors'
+    SINGULARNAME: Sponsor
+    db_AkademischerGrad: 'Akademischer grad'
+    db_Anrede: Anrede
+    db_Email: Email
+    db_Firma: Firma
+    db_Nachname: Nachname
+    db_Ort: Ort
+    db_Preisgeld: Preisgeld
+    db_Strasse: Strasse
+    db_Vorname: Vorname
+  SponsorAdmin:
+    MENUTITLE: Sponsor
+  UnfinishedAdmin:
+    MENUTITLE: 'Jury unfinished'
+  app\RegistrationForm\RegistrationFormFiles:
+    PLURALNAME: 'Registration Form Filess'
+    PLURALS:
+      one: 'A Registration Form Files'
+      other: '{count} Registration Form Filess'
+    SINGULARNAME: 'Registration Form Files'
+    db_FileGroup: 'File group'
+    db_FileName: 'File name'
+    has_one_MultiFormSession: 'Multi form session'
+  app\RegistrationForm\RegistrationForm_Step1:
+    PLURALNAME: 'Registration Form Step1s'
+    PLURALS:
+      one: 'A Registration Form Step1'
+      other: '{count} Registration Form Step1s'
+    SINGULARNAME: 'Registration Form Step1'
+  app\RegistrationForm\RegistrationForm_Step2:
+    PLURALNAME: 'Registration Form Step2s'
+    PLURALS:
+      one: 'A Registration Form Step2'
+      other: '{count} Registration Form Step2s'
+    SINGULARNAME: 'Registration Form Step2'
+  app\RegistrationForm\RegistrationForm_Step3:
+    PLURALNAME: 'Registration Form Step3s'
+    PLURALS:
+      one: 'A Registration Form Step3'
+      other: '{count} Registration Form Step3s'
+    SINGULARNAME: 'Registration Form Step3'
+  app\RegistrationForm\RegistrationForm_Step4:
+    PLURALNAME: 'Registration Form Step4s'
+    PLURALS:
+      one: 'A Registration Form Step4'
+      other: '{count} Registration Form Step4s'
+    SINGULARNAME: 'Registration Form Step4'

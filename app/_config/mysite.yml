@@ -1,0 +1,38 @@
+---
+Name: myproject
+---
+SilverStripe\Core\Manifest\ModuleManifest:
+  project: app
+SilverStripe\Security\Member:
+  extensions:
+    - JuryMemberExtension
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - CustomSiteConfig
+SilverStripe\Assets\Flysystem\FlysystemAssetStore: 
+  legacy_filenames: true
+
+# SS6 scaffolds SiteTree CMS fields - restrict to the fields SS5 showed, page types add their own fields explicitly
+SilverStripe\CMS\Model\SiteTree:
+  scaffold_cms_fields_settings:
+    restrictRelations:
+      - 'ThisRelationDoesntExist'
+    restrictFields:
+      - 'Title'
+      - 'MenuTitle'
+      - 'URLSegment'
+      - 'Content'
+SilverStripe\CMS\Model\VirtualPage:
+  scaffold_cms_fields_settings:
+    restrictFields:
+      - 'CopyContentFrom'
+SilverStripe\CMS\Model\RedirectorPage:
+  scaffold_cms_fields_settings:
+    restrictFields:
+      - 'ExternalURL'
+      - 'LinkTo'
+      - 'LinkToFile'
+
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_css:
+    - themes/geniusideen/css/table.css
